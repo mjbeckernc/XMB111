@@ -27,12 +27,15 @@
 ********************************************************************************;
 cas;
 caslib _all_ assign;
+
 %let pathname=/nfsshare/sashls2/mattb/XMB111;
 %let rootdir=/nfsshare/sashls2/mattb/XMB111;
+
 %let ptitle1=%str(ABCD, Inc.);
 %let ptitle2=%str(XMB-111 Draft);
 %let ddt=&pathname./doc/ddt.xls;
 %let sdtm=&pathname./doc/sdtm.xls;
+
 libname raw "&pathname./data/Rawdata";
 libname sdtm "&pathname./data/SDTM";
 
