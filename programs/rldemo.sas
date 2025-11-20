@@ -48,18 +48,17 @@ data dm(rename=(qval=init));
   merge dm(in=x) suppdm(in=y);
   by usubjid;
   if x;
-  page=int(_n_/8)+1;
+  page=int(_n_/7)+1;
 run;
 
 %mcase(inds=dm, exceptl=%str('USUBJID','INIT','BRTHDTC'));
 
-%mtitle(progid=ldemo, type=HTML);
+%mtitle(progid=ldemo, type=rtf);
 
 proc report data=dm headline headskip nowindows split='|' missing spacing=1;
-  column page usubjid init brthdtc age sex race height weight tbsa;
+  column page usubjid brthdtc age sex race height weight tbsa;
   define page / order noprint;
   define usubjid / order 'Subject' style={just=left cellwidth=7%};
-  define init / display 'Initials' style={just=left cellwidth=6%};
   define brthdtc / display 'Date of Birth' style={just=left cellwidth=10%};
   define age / order 'Age|(Years)' format=4.1 style={just=center cellwidth=7%};
   define sex / display 'Gender' style={just=left cellwidth=7%};
@@ -76,4 +75,4 @@ run;
 ods rtf close;
 ods listing;
 
-%mpageof;
+%mpageof(type=rtf);

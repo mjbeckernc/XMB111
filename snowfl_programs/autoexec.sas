@@ -30,7 +30,7 @@
 %let sdtm=&pathname./doc/sdtm.xls;
 
 libname snowlib SASIOSNF server="sas_partner.east-us-2.azure.snowflakecomputing.com"
-  user=robcol password=robcol schema=ROBCOL preserve_tab_names=yes;
+  user=robcol password=&snow_login schema=ROBCOL preserve_tab_names=yes;
 
 *libname derived "&pathname./data/ADaM";
 %sysfunc(ifc(%sysfunc(libref(derived)),libname derived "&pathname./data/ADaM",));

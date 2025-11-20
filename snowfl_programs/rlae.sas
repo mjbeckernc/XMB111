@@ -43,7 +43,7 @@ run;
 data ae;
   set ae;
   by usubjid aespid;
-  length aename date_str trt_str out_str $400 aedur 8;
+  length aename date_str trt_str out_str $120 aedur 8;
   page=int(_n_/4)+1;
   if aeendtc='' and aeenrf ne '' then aeendtc=propcase(aeenrf);
   aedur=(aeendy-aestdy)+1;

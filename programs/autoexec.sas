@@ -27,6 +27,7 @@
 ********************************************************************************;
 cas;
 caslib _all_ assign;
+%global output;
 
 %let pathname=/nfsshare/sashls2/mattb/XMB111;
 %let rootdir=/nfsshare/sashls2/mattb/XMB111;
@@ -68,7 +69,7 @@ libname library "&pathname./data/ADaM";
 %let ls=130;
 options linesize=136 pagesize=50 formchar="|----|+|---+=|-/\<>*";
 options mautosource mrecall missing='';
-options sasautos=("&pathname" "&pathname./macros" sasautos) fmtsearch=(fmtdata raw WORK);
+options sasautos=("&pathname" "/nfsshare/sashls2/mattb/GlobalMacros" "&pathname./macros" sasautos) fmtsearch=(fmtdata raw WORK);
 ods path sashelp.tmplmst(read);
 
 * &derdata..matt;

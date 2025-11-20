@@ -21,6 +21,8 @@
 ********************************************************************************;
 %macro listing(progid=tae1, subset=);
 
+ods listing close; 
+
 proc sort data=sdtm.ae out=ae;
   by usubjid;
   %if &subset ne %then %do;
@@ -44,7 +46,7 @@ data ae;
   set ae;
   by usubjid aespid;
   length aename date_str trt_str out_str $400 aedur 8;
-  page=int(_n_/4)+1;
+  page=int(_n_/2)+1;
   if aeendtc='' and aeenrf ne '' then aeendtc=propcase(aeenrf);
   aedur=(aeendy-aestdy)+1;
   if aeoccur='N' then do;
@@ -75,7 +77,7 @@ run;
   run;
 %end;
 
-%mtitle(progid=&progid);
+%mtitle(progid=&progid, type=rtf);
 
 footnote1;
 
@@ -121,10 +123,10 @@ proc report data=ae headline headskip nowindows split='|' missing spacing=2;
   break after page / page;
 run;
 
-ods html close;
+ods rtf close;
 ods listing;
 
-%mpageof;
+%mpageof(type=rtf);
 
 %mend listing;
 %listing(progid=lae1);

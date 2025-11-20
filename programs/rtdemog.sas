@@ -72,9 +72,10 @@ data final;
   length firstcol $30;
   if first.order then firstcol=put(order,orderf.);
   else firstcol='';
+  if order>3 then page=2;
 run;
 
-%mtitle(progid=&progid);
+%mtitle(progid=&progid, type=rtf);
 
 proc report data=final headline headskip nowindows split='|' missing spacing=1;
   column  page order sorder firstcol text ("Age Group (years)" trt1 trt2 trt3 trt4 trt5) trt6;
@@ -96,9 +97,10 @@ proc report data=final headline headskip nowindows split='|' missing spacing=1;
 run;
 
 ods rtf close;
+ods pdf close;
 ods listing;
 
-%mpageof;
+%mpageof(type=rtf);
 
 /*
 %mtitle2(progid=&itprogid, orient=P);
@@ -120,12 +122,13 @@ proc report data=final headline headskip nowindows split='|' missing spacing=1 s
     line " ";
   endcomp;
 run;
-*/
+
 
 ods html close;
 ods listing;
 
-%mpageof;
+%mpageof(type=rtf);
+*/
 
 %mend rtdemog;
 %rtdemog(progid=tdemog1, tcond=, itprogid=tdemog4a);

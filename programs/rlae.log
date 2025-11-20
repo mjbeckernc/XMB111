@@ -1,0 +1,1396 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable LSTFILENAME resolves to /nfsshare/sashls2/mattb/XMB111/programs/rlae.html
+MPRINT(CHECKMACROVAR):   ods html5 file="/nfsshare/sashls2/mattb/XMB111/programs/rlae.html";
+NOTE: Writing HTML5 Body file: /nfsshare/sashls2/mattb/XMB111/programs/rlae.html
+SYMBOLGEN:  Macro variable SASFILEPATH resolves to /nfsshare/sashls2/mattb/XMB111/programs/rlae.sas
+NOTE: %INCLUDE (level 1) file /nfsshare/sashls2/mattb/XMB111/programs/rlae.sas is file /nfsshare/sashls2/mattb/XMB111/programs/rlae.sas.
+513  +********************************************************************************;
+MPRINT(CHECKMACROVAR):   ********************************************************************************;
+514  +*** Program:        \biometrics\499\499H01\analyses_mjb\CSR\programs\prod\rlae.sas
+515  +*** Programmer:     Matt Becker
+516  +*** Date Created:   01Apr2010
+517  +***
+518  +*** Input :         SDTM DM, STDM AE
+519  +***
+520  +*** Output:         Listing 17:  Adverse Events
+521  +***
+522  +*** Purpose:        To create the listing of adverse events
+523  +***
+524  +*** Comments:
+525  +***
+526  +*** Software:       SAS 9 (Windows)
+527  +***
+528  +*** Modifications:
+529  +***
+530  +*** Date       Programmer        Description
+531  +*** ---------  ----------------  --------------
+532  +***
+533  +********************************************************************************;
+22                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+MPRINT(CHECKMACROVAR):   *** Program: \biometrics\499\499H01\analyses_mjb\CSR\programs\prod\rlae.sas *** Programmer: Matt Becker *** 
+Date Created: 01Apr2010 *** *** Input : SDTM DM, STDM AE *** *** Output: Listing 17: Adverse Events *** *** Purpose: To create the 
+listing of adverse events *** *** Comments: *** *** Software: SAS 9 (Windows) *** *** Modifications: *** *** Date Programmer 
+Description *** --------- ---------------- -------------- *** 
+********************************************************************************;
+534  +%macro listing(progid=tae1, subset=);
+535  +
+536  +ods listing close;
+537  +
+538  +proc sort data=sdtm.ae out=ae;
+539  +  by usubjid;
+540  +  %if &subset ne %then %do;
+541  +    where &subset;
+542  +  %end;
+543  +
+544  +proc sort data=sdtm.dm out=dm(keep=usubjid age);
+545  +  by usubjid;
+546  +
+547  +data ae;
+548  +  merge ae(in=x) dm(in=y);
+549  +  by usubjid;
+550  +  if x;
+551  +run;
+552  +
+553  +proc sort data=ae;
+554  +  by usubjid aespid;
+555  +run;
+556  +
+557  +data ae;
+558  +  set ae;
+559  +  by usubjid aespid;
+560  +  length aename date_str trt_str out_str $400 aedur 8;
+561  +  page=int(_n_/4)+1;
+562  +  if aeendtc='' and aeenrf ne '' then aeendtc=propcase(aeenrf);
+563  +  aedur=(aeendy-aestdy)+1;
+564  +  if aeoccur='N' then do;
+565  +    aename='None';
+566  +	date_str='';
+567  +	trt_str='';
+568  +	out_str='';
+569  +  end;
+570  +  else do;
+571  +    aename='V: '||trim(left(aeterm))||'`-2nP: '||trim(left(aedecod))||'`-2nS: '||trim(left(aebodsys));
+572  +    date_str='Start Date: '||trim(left(aestdtc))||'`-2n'||'Start Day: '||trim(left(aestdy))||'`-2n `-2n'||'Stop Date:
+572 !+'||trim(left(aeendtc))||'`-2n'||'Duration: '||trim(left(aedur));
+573  +	trt_str='Med: '||trim(left(put(aecontrt,$yesno.)))||'`-2n'||'Other: '||trim(left(put(aeaddyn,$yesno.)));
+574  +	out_str='O: '||trim(left(aeout))||'`-2n'||'A: '||trim(left(aeacn));
+575  +  end;
+23                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+576  +run;
+577  +
+578  +%mcase(inds=ae, exceptl=%str('USUBJID','DATE_STR','TRT_STR'));
+579  +
+580  +%mnumobs(inds=ae);
+581  +
+582  +%if &nobs=0 %then %do;
+583  +  data newae;
+584  +    aename='None Reported';
+585  +  run;
+586  +
+587  +  data ae;
+588  +    set ae newae;
+589  +  run;
+590  +%end;
+591  +
+592  +%mtitle(progid=&progid);
+593  +
+594  +footnote1;
+595  +
+596  +proc report data=ae headline headskip nowindows split='|' missing spacing=2;
+597  +  column page usubjid age aespid aename date_str aesev aerel trt_str out_str
+598  +    %if "&progid" ne "lae3" %then %do;
+599  +      aeser
+600  +    %end;
+601  +	%if "&progid" ne "lae6" %then %do;
+602  +      aehayn
+603  +    %end;
+604  +       ;
+605  +  define page / order noprint;
+606  +  define usubjid / order 'Subject' style={just=left cellwidth=6%};
+607  +  define age / order 'Age|(Years)' format=4.1 style={just=center cellwidth=5%};
+608  +  define aespid / order noprint;
+609  +  define aename / order 'V: AE Verbatim Term|P: Preferred Term`{super a}|S: System Organ Class' flow style={just=left
+609 !+cellwidth=22%};
+610  +  define date_str / display 'Start/Stop Date|Duration(Days)' style={just=left cellwidth=15%};
+611  +  define aesev / display 'Severity' style={just=left cellwidth=8%};
+612  +  define aerel / display 'Relationship|to Drug`{super b}' style={just=left cellwidth=8%};
+613  +  define trt_str / display 'Con Med/|Other Trt?' style={just=left cellwidth=7%};
+614  +  define out_str / display 'Outcome (O)/|Action Taken|with Study|Treatment(A)' flow style={just=left cellwidth=15%};
+615  +  %if "&progid" ne "lae3" %then %do;
+616  +    define aeser / display 'Serious?' format=$yesno. style={just=left cellwidth=6%};
+617  +  %end;
+618  +  %if "&progid" ne "lae6" %then %do;
+619  +    define aehayn / display 'Hyper-|sensitivity`{super c}' format=$yesno. style={just=left cellwidth=7%};
+620  +  %end;
+621  +  compute after usubjid / style=[just=left];
+622  +     line 143*'_';
+24                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+623  +  endcomp;
+624  +  compute after aename;
+625  +    line "  ";
+626  +  endcomp;
+627  +  compute after page / style=[just=left];
+628  +	 line "&footn1";
+629  +	 line "&footn2";
+630  +	 line "&footn3";
+631  +	 line "&footn4";
+632  +	 line " ";
+633  +	 line "&footn11";
+634  +  endcomp;
+635  +  break after page / page;
+636  +run;
+637  +
+638  +ods html close;
+639  +ods listing;
+640  +
+641  +%mpageof;
+642  +
+643  +%mend listing;
+644  +%listing(progid=lae1);
+MLOGIC(LISTING):  Beginning execution.
+MLOGIC(LISTING):  Parameter PROGID has value lae1
+MLOGIC(LISTING):  Parameter SUBSET has value 
+MPRINT(LISTING):   ods listing close;
+NOTE: Data file SDTM.AE.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+MPRINT(LISTING):   proc sort data=sdtm.ae out=ae;
+MPRINT(LISTING):   by usubjid;
+SYMBOLGEN:  Macro variable SUBSET resolves to 
+MLOGIC(LISTING):  %IF condition &subset ne is FALSE
+
+NOTE: There were 101 observations read from the data set SDTM.AE.
+NOTE: The data set WORK.AE has 101 observations and 26 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file SDTM.DM.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+MPRINT(LISTING):   proc sort data=sdtm.dm out=dm(keep=usubjid age);
+MPRINT(LISTING):   by usubjid;
+NOTE: There were 32 observations read from the data set SDTM.DM.
+NOTE: The data set WORK.DM has 32 observations and 2 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+25                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+      cpu time            0.00 seconds
+      
+
+MPRINT(LISTING):   data ae;
+MPRINT(LISTING):   merge ae(in=x) dm(in=y);
+MPRINT(LISTING):   by usubjid;
+MPRINT(LISTING):   if x;
+MPRINT(LISTING):   run;
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set WORK.AE has 101 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(LISTING):   proc sort data=ae;
+MPRINT(LISTING):   by usubjid aespid;
+MPRINT(LISTING):   run;
+
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: The data set WORK.AE has 101 observations and 27 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(LISTING):   data ae;
+MPRINT(LISTING):   set ae;
+MPRINT(LISTING):   by usubjid aespid;
+MPRINT(LISTING):   length aename date_str trt_str out_str $400 aedur 8;
+MPRINT(LISTING):   page=int(_n_/4)+1;
+MPRINT(LISTING):   if aeendtc='' and aeenrf ne '' then aeendtc=propcase(aeenrf);
+MPRINT(LISTING):   aedur=(aeendy-aestdy)+1;
+MPRINT(LISTING):   if aeoccur='N' then do;
+MPRINT(LISTING):   aename='None';
+MPRINT(LISTING):   date_str='';
+MPRINT(LISTING):   trt_str='';
+MPRINT(LISTING):   out_str='';
+MPRINT(LISTING):   end;
+MPRINT(LISTING):   else do;
+MPRINT(LISTING):   aename='V: '||trim(left(aeterm))||'`-2nP: '||trim(left(aedecod))||'`-2nS: '||trim(left(aebodsys));
+MPRINT(LISTING):   date_str='Start Date: '||trim(left(aestdtc))||'`-2n'||'Start Day: '||trim(left(aestdy))||'`-2n `-2n'||'Stop Date: 
+'||trim(left(aeendtc))||'`-2n'||'Duration: '||trim(left(aedur));
+MPRINT(LISTING):   trt_str='Med: '||trim(left(put(aecontrt,$yesno.)))||'`-2n'||'Other: '||trim(left(put(aeaddyn,$yesno.)));
+MPRINT(LISTING):   out_str='O: '||trim(left(aeout))||'`-2n'||'A: '||trim(left(aeacn));
+MPRINT(LISTING):   end;
+MPRINT(LISTING):   run;
+26                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+
+NOTE: Numeric values have been converted to character values at the places given by: (Line):(Column).
+      644:185   644:36    
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      34 at 644:124   
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: The data set WORK.AE has 101 observations and 33 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(MCASE):  Beginning execution.
+MLOGIC(MCASE):  This macro was compiled from the autocall file /nfsshare/sashls2/mattb/XMB111/macros/mcase.sas
+MLOGIC(MCASE):  Parameter INDS has value ae
+MLOGIC(MCASE):  Parameter EXCEPTL has value 'USUBJID''DATE_STR''TRT_STR'
+MLOGIC(MCASE):  Parameter FIX_ID has value Y
+SYMBOLGEN:  Macro variable INDS resolves to ae
+MLOGIC(MCASE):  %IF condition &inds= is FALSE
+MPRINT(MCASE):   proc sql noprint;
+SYMBOLGEN:  Macro variable INDS resolves to ae
+SYMBOLGEN:  Macro variable EXCEPTL resolves to 'USUBJID','DATE_STR','TRT_STR'
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+MPRINT(MCASE):   select distinct name into :varlist separated by ' ' from dictionary.columns where libname='WORK' and memname="AE" and 
+upcase(type)="CHAR" and upcase(name) not in('USUBJID','DATE_STR','TRT_STR');
+MPRINT(MCASE):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+MLOGIC(MCASE):  %IF condition "&varlist" ne "" is TRUE
+SYMBOLGEN:  Macro variable INDS resolves to ae
+MPRINT(MCASE):   data ae;
+SYMBOLGEN:  Macro variable INDS resolves to ae
+MPRINT(MCASE):   set ae;
+SYMBOLGEN:  Macro variable FIX_ID resolves to Y
+MLOGIC(MCASE):  %IF condition %upcase(&fix_id)=Y is TRUE
+MPRINT(MCASE):   usubjid=substr(usubjid,8);
+MLOGIC(MCASE):  %LET (variable name is NUM)
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+MLOGIC(MCASE):  %PUT &myval
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+27                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) loop beginning; condition is TRUE.  
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=propcase(AEACN);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEACN
+MPRINT(MCASE):   AEACN=tranwrd(AEACN,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 1
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 2
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=propcase(AEADDTRT);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+28                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDTRT
+MPRINT(MCASE):   AEADDTRT=tranwrd(AEADDTRT,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 2
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 3
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=propcase(AEADDYN);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEADDYN
+MPRINT(MCASE):   AEADDYN=tranwrd(AEADDYN,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 3
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 4
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=propcase(AEBODSYS);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'s:','S:');
+29                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+SYMBOLGEN:  Macro variable MYVAL resolves to AEBODSYS
+MPRINT(MCASE):   AEBODSYS=tranwrd(AEBODSYS,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 4
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 5
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=propcase(AECAT);
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECAT
+MPRINT(MCASE):   AECAT=tranwrd(AECAT,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 5
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+30                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 6
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=propcase(AECONTRT);
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+SYMBOLGEN:  Macro variable MYVAL resolves to AECONTRT
+MPRINT(MCASE):   AECONTRT=tranwrd(AECONTRT,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 6
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 7
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=propcase(AEDECOD);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'a:','A:');
+31                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+SYMBOLGEN:  Macro variable MYVAL resolves to AEDECOD
+MPRINT(MCASE):   AEDECOD=tranwrd(AEDECOD,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 7
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 8
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=propcase(AEENDTC);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENDTC
+MPRINT(MCASE):   AEENDTC=tranwrd(AEENDTC,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 8
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 9
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=propcase(AEENRF);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+32                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+SYMBOLGEN:  Macro variable MYVAL resolves to AEENRF
+MPRINT(MCASE):   AEENRF=tranwrd(AEENRF,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 9
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 10
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=propcase(AEHAYN);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+SYMBOLGEN:  Macro variable MYVAL resolves to AEHAYN
+MPRINT(MCASE):   AEHAYN=tranwrd(AEHAYN,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 10
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+33                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 11
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=propcase(AEOCCUR);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOCCUR
+MPRINT(MCASE):   AEOCCUR=tranwrd(AEOCCUR,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 11
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 12
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=propcase(AEOUT);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+34                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+SYMBOLGEN:  Macro variable MYVAL resolves to AEOUT
+MPRINT(MCASE):   AEOUT=tranwrd(AEOUT,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 12
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 13
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=propcase(AEREL);
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+SYMBOLGEN:  Macro variable MYVAL resolves to AEREL
+MPRINT(MCASE):   AEREL=tranwrd(AEREL,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 13
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 14
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=propcase(AESEQ);
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+35                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEQ
+MPRINT(MCASE):   AESEQ=tranwrd(AESEQ,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 14
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 15
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=propcase(AESER);
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+SYMBOLGEN:  Macro variable MYVAL resolves to AESER
+MPRINT(MCASE):   AESER=tranwrd(AESER,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 15
+36                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 16
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=propcase(AESEV);
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+SYMBOLGEN:  Macro variable MYVAL resolves to AESEV
+MPRINT(MCASE):   AESEV=tranwrd(AESEV,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 16
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 17
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=propcase(AESPID);
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+37                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+SYMBOLGEN:  Macro variable MYVAL resolves to AESPID
+MPRINT(MCASE):   AESPID=tranwrd(AESPID,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 17
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 18
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=propcase(AESTDTC);
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+SYMBOLGEN:  Macro variable MYVAL resolves to AESTDTC
+MPRINT(MCASE):   AESTDTC=tranwrd(AESTDTC,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 18
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 19
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=propcase(AETERM);
+38                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+SYMBOLGEN:  Macro variable MYVAL resolves to AETERM
+MPRINT(MCASE):   AETERM=tranwrd(AETERM,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 19
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 20
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=propcase(DOMAIN);
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+SYMBOLGEN:  Macro variable MYVAL resolves to DOMAIN
+MPRINT(MCASE):   DOMAIN=tranwrd(DOMAIN,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+39                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable NUM resolves to 20
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 21
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=propcase(STUDYID);
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+SYMBOLGEN:  Macro variable MYVAL resolves to STUDYID
+MPRINT(MCASE):   STUDYID=tranwrd(STUDYID,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 21
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 22
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=propcase(VISIT);
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'v:','V:');
+40                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+SYMBOLGEN:  Macro variable MYVAL resolves to VISIT
+MPRINT(MCASE):   VISIT=tranwrd(VISIT,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 22
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 23
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=propcase(aename);
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+SYMBOLGEN:  Macro variable MYVAL resolves to aename
+MPRINT(MCASE):   aename=tranwrd(aename,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 23
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 24
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MLOGIC(MCASE):  %DO %WHILE(&myval ne) condition is TRUE; loop will iterate again.
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+41                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+MPRINT(MCASE):   out_str=propcase(out_str);
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'s:','S:');
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'p:','P:');
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'v:','V:');
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'a:','A:');
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'w:','W:');
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+SYMBOLGEN:  Macro variable MYVAL resolves to out_str
+MPRINT(MCASE):   out_str=tranwrd(out_str,'ongoing','Ongoing');
+MLOGIC(MCASE):  %LET (variable name is NUM)
+SYMBOLGEN:  Macro variable NUM resolves to 24
+MLOGIC(MCASE):  %LET (variable name is MYVAL)
+SYMBOLGEN:  Macro variable VARLIST resolves to AEACN AEADDTRT AEADDYN AEBODSYS AECAT AECONTRT AEDECOD AEENDTC AEENRF AEHAYN AEOCCUR 
+            AEOUT AEREL AESEQ AESER AESEV AESPID AESTDTC AETERM DOMAIN STUDYID VISIT aename out_str
+SYMBOLGEN:  Macro variable NUM resolves to 25
+SYMBOLGEN:  Macro variable MYVAL resolves to 
+MLOGIC(MCASE):  %DO %WHILE() condition is FALSE; loop will not iterate again.
+MPRINT(MCASE):   run;
+
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: The data set WORK.AE has 101 observations and 33 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.02 seconds
+      
+
+MLOGIC(MCASE):  Ending execution.
+MPRINT(LISTING):  ;
+MLOGIC(MNUMOBS):  Beginning execution.
+MLOGIC(MNUMOBS):  This macro was compiled from the autocall file /nfsshare/sashls2/mattb/XMB111/macros/mnumobs.sas
+MLOGIC(MNUMOBS):  Parameter INDS has value ae
+MLOGIC(MNUMOBS):  %GLOBAL  NOBS
+SYMBOLGEN:  Macro variable INDS resolves to ae
+MLOGIC(MNUMOBS):  %IF condition &inds= is FALSE
+MPRINT(MNUMOBS):   proc sql noprint;
+SYMBOLGEN:  Macro variable INDS resolves to ae
+MPRINT(MNUMOBS):   select nobs into :nobs separated by ' ' from dictionary.tables where libname='WORK' and memname="AE";
+MPRINT(MNUMOBS):   quit;
+42                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(MNUMOBS):  Ending execution.
+MPRINT(LISTING):  ;
+SYMBOLGEN:  Macro variable NOBS resolves to 101
+MLOGIC(LISTING):  %IF condition &nobs=0 is FALSE
+MLOGIC(MTITLE):  Beginning execution.
+MLOGIC(MTITLE):  This macro was compiled from the autocall file /nfsshare/sashls2/mattb/XMB111/macros/mtitle.sas
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+MLOGIC(MTITLE):  Parameter PROGID has value lae1
+MLOGIC(MTITLE):  Parameter TYPE has value html
+MLOGIC(MTITLE):  Parameter ORIENT has value l
+MLOGIC(MTITLE):  Parameter SASOPT has value nodate nonumber nobyline
+MLOGIC(MTITLE):  Parameter BYVAR has value 
+MLOGIC(MTITLE):  Parameter BYTXT has value 
+MLOGIC(MTITLE):  Parameter TMNAME has value rtf
+MLOGIC(MTITLE):  Parameter NOPAGE has value n
+SYMBOLGEN:  Macro variable SASOPT resolves to nodate nonumber nobyline
+MLOGIC(MTITLE):  %IF condition &sasopt ne is TRUE
+SYMBOLGEN:  Macro variable SASOPT resolves to nodate nonumber nobyline
+MPRINT(MTITLE):   options nodate nonumber nobyline;
+MLOGIC(MTITLE):  %GLOBAL  OUTPUTNAME  
+MPRINT(MTITLE):   options mprint;
+MLOGIC(MTITLE):  %LET (variable name is MLS)
+SYMBOLGEN:  Macro variable ORIENT resolves to l
+MLOGIC(MTITLE):  %IF condition %upcase(&orient)=P is FALSE
+MLOGIC(MTITLE):  %LET (variable name is ORIENTO)
+SYMBOLGEN:  Macro variable ORIENTO resolves to Landscape
+MPRINT(MTITLE):   options orientation=Landscape;
+MLOGIC(MTITLE):  %GLOBAL  TABLNO NUMTITLE FOOTN1 FOOTN2 FOOTN3 FOOTN4 FOOTN5 FOOTN6 FOOTN7 FOOTN8 FOOTN9 SPAGENO SFOOTN1 SFOOTN2 
+      SFOOTN3 SFOOTN8 SFOOTN9 SFOOTN10 SDATA NUMFOOT OUTPUTNAME         TABNUM TITLE1 TITLE2 TITLE3 TITLE4 TITLE5 TITLE6 OUTPUTF 
+      L_SOURCE  FOOTN11
+MLOGIC(MTITLE):  %LET (variable name is FSTLN)
+MLOGIC(MTITLE):  %LET (variable name is CHGLN)
+MLOGIC(MTITLE):  %LET (variable name is FOOTBR)
+MPRINT(MTITLE):   data toc_prog;
+SYMBOLGEN:  Macro variable DERDATA resolves to derived
+MPRINT(MTITLE):   set derived.toc_prog;
+NOTE: Data file DERIVED.TOC_PROG.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+MPRINT(MTITLE):   if compress(upcase(progid))=upcase("lae1");
+MPRINT(MTITLE):   call symput('tabnum',trim(tabnum));
+MPRINT(MTITLE):   if index(title1,'`{') then offset=9;
+MPRINT(MTITLE):   else offset=0;
+                                                             The SAS System
+
+SYMBOLGEN:  Macro variable MLS resolves to 170
+MPRINT(MTITLE):   call symput('title1',trim(title1)||repeat(" 
+",(170-length(title1)-length(tabnum)-30-4+offset))||"[Page_00000_of_99999]");
+MPRINT(MTITLE):   call symput('title2',trim(title2));
+MPRINT(MTITLE):   call symput('title3',trim(title3));
+MPRINT(MTITLE):   call symput('title4',trim(title4));
+MPRINT(MTITLE):   call symput('title5',trim(title5));
+MPRINT(MTITLE):   call symput('title6',trim(title6));
+MPRINT(MTITLE):   call symput('outputname',trim(outname));
+MPRINT(MTITLE):   call symput('numtitle',compress(put(numtitle,3.)));
+MPRINT(MTITLE):   call symput('footn1',trim(footn1));
+MPRINT(MTITLE):   call symput('footn2',trim(footn2));
+MPRINT(MTITLE):   call symput('footn3',trim(footn3));
+MPRINT(MTITLE):   call symput('footn4',trim(footn4));
+MPRINT(MTITLE):   call symput('footn5',trim(footn5));
+MPRINT(MTITLE):   call symput('footn6',trim(footn6));
+MPRINT(MTITLE):   call symput('footn7',trim(footn7));
+MPRINT(MTITLE):   call symput('footn8',trim(footn8));
+MPRINT(MTITLE):   call symput('progname',trim(progname));
+SYMBOLGEN:  Macro variable DRAFT_FINAL resolves to FINAL
+SYMBOLGEN:  Macro variable SYSDATE9 resolves to 11JUL2025
+SYMBOLGEN:  Macro variable SYSTIME resolves to 00:23
+MPRINT(MTITLE):   if l_source ne '' then footn11="PROGRAM: " || trim(progname) || ".sas, " || "SOURCE: " || trim(l_source) || ", 
+(FINAL) 11JUL2025 00:23";
+SYMBOLGEN:  Macro variable DRAFT_FINAL resolves to FINAL
+SYMBOLGEN:  Macro variable SYSDATE9 resolves to 11JUL2025
+SYMBOLGEN:  Macro variable SYSTIME resolves to 00:23
+MPRINT(MTITLE):   else footn11="PROGRAM: " || trim(progname) || ".sas, (FINAL) 11JUL2025 00:23";
+MPRINT(MTITLE):   footn11l=trim(footn11);
+MPRINT(MTITLE):   call symput('footn11',trim(footn11l));
+MPRINT(MTITLE):   call symput('numfoot',compress(put(numfoot,3.)));
+SYMBOLGEN:  Macro variable TYPE resolves to html
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition &TYPE=LST or &TYPE=PS is FALSE
+SYMBOLGEN:  Macro variable BYVAR resolves to 
+MLOGIC(MTITLE):  %IF condition &BYVAR NE is FALSE
+MPRINT(MTITLE):   if index(tabnum,'Table') then call symput('outputf','tables');
+MPRINT(MTITLE):   else if index(tabnum,'Appendix') then call symput('outputf','listings');
+MPRINT(MTITLE):   else if index(tabnum,'Figure') then call symput('outputf','figures');
+SYMBOLGEN:  Macro variable ORIENT resolves to l
+MLOGIC(MTITLE):  %IF condition %UPCASE(&ORIENT)=P is FALSE
+MPRINT(MTITLE):   run;
+
+NOTE: There were 110 observations read from the data set DERIVED.TOC_PROG.
+NOTE: The data set WORK.TOC_PROG has 1 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+                                                             The SAS System
+
+      
+
+MLOGIC(MTITLE):  %LET (variable name is NUMOBS)
+MPRINT(MTITLE):   proc sql noprint;
+MPRINT(MTITLE):   select count(*) into: numobs from toc_prog;
+MPRINT(MTITLE):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(MTITLE):  %GLOBAL  _OUTPUTNAME
+MLOGIC(MTITLE):  %LET (variable name is _OUTPUTNAME)
+SYMBOLGEN:  Macro variable OUTPUT resolves to /nfsshare/sashls2/mattb/XMB111/programs/Output
+SYMBOLGEN:  Macro variable OUTPUTF resolves to listings
+SYMBOLGEN:  Macro variable OUTPUTNAME resolves to a16_02_07_01_lae1
+SYMBOLGEN:  Macro variable NUMOBS resolves to        1
+MLOGIC(MTITLE):  %IF condition &numobs=0 is FALSE
+SYMBOLGEN:  Macro variable NUMOBS resolves to        1
+MLOGIC(MTITLE):  %IF condition &numobs>1 is FALSE
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition %upcase(&type)=RTF is FALSE
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition %upcase(&type)=HTML is TRUE
+MPRINT(MTITLE):   *ods listing close;
+MPRINT(MTITLE):   ods path sashelp.tmplmst;
+MPRINT(MTITLE):   * &derdata..matt;
+SYMBOLGEN:  Macro variable TYPE resolves to html
+SYMBOLGEN:  Macro variable OUTPUT resolves to /nfsshare/sashls2/mattb/XMB111/programs/Output
+SYMBOLGEN:  Macro variable OUTPUTF resolves to listings
+SYMBOLGEN:  Macro variable OUTPUTNAME resolves to a16_02_07_01_lae1
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MPRINT(MTITLE):   ods html file="/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html";
+NOTE: Writing HTML Body file: /nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html
+MPRINT(MTITLE):   options linesize=160 pagesize=50;
+WARNING: Apparent symbolic reference PTITLE1 not resolved.
+MPRINT(MTITLE):   title1 j=l "&ptitle1";
+WARNING: Apparent symbolic reference PTITLE2 not resolved.
+MPRINT(MTITLE):   title2 j=l "&ptitle2";
+SYMBOLGEN:  Macro variable TABNUM resolves to Appendix 16.2.7-1
+SYMBOLGEN:  Macro variable TITLE1 resolves to Adverse Events                                                                                                    
+                  [Page_00000_of_99999]
+MPRINT(MTITLE):   title4 j=l "Appendix 16.2.7-1:  Adverse Events                                                                                                
+          [Page_00000_of_99999]";
+SYMBOLGEN:  Macro variable NUMTITLE resolves to 1
+MLOGIC(MTITLE):  %DO loop beginning; index variable I; start value is 2; stop value is 1; by value is 1.  Loop will not be executed.
+SYMBOLGEN:  Macro variable BYVAR resolves to 
+MLOGIC(MTITLE):  %IF condition &byvar ne is FALSE
+                                                                         The SAS System
+
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition %upcase(&type)=RTF is FALSE
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition %upcase(&type)=LST is FALSE
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MTITLE):  %IF condition %upcase(&type)=HTML is TRUE
+SYMBOLGEN:  Macro variable FOOTBR resolves to ''
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+SYMBOLGEN:  Macro variable NUMFOOT resolves to 3
+MLOGIC(MTITLE):  %IF condition &numfoot ne 0 is TRUE
+SYMBOLGEN:  Macro variable NUMFOOT resolves to 3
+MLOGIC(MTITLE):  %DO loop beginning; index variable I; start value is 1; stop value is 3; by value is 1.  
+SYMBOLGEN:  && resolves to &.
+SYMBOLGEN:  Macro variable I resolves to 1
+SYMBOLGEN:  Macro variable FOOTN1 resolves to `{super a}MedDRA version 12.1
+WARNING: The FOOTNOTE statement is ambiguous due to invalid options or unquoted text.
+SYMBOLGEN:  Macro variable I resolves to 1
+SYMBOLGEN:  Macro variable NUMFOOT resolves to 3
+MLOGIC(MTITLE):  %IF condition &i ^= &numfoot is TRUE
+SYMBOLGEN:  Macro variable CHGLN resolves to ''
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+MLOGIC(MTITLE):  %DO loop index variable I is now 2; loop will iterate again.
+SYMBOLGEN:  && resolves to &.
+SYMBOLGEN:  Macro variable I resolves to 2
+SYMBOLGEN:  Macro variable FOOTN2 resolves to `{super b}Relationship to drug is determined by the investigator
+SYMBOLGEN:  Macro variable I resolves to 2
+SYMBOLGEN:  Macro variable NUMFOOT resolves to 3
+MLOGIC(MTITLE):  %IF condition &i ^= &numfoot is TRUE
+SYMBOLGEN:  Macro variable CHGLN resolves to ''
+SYMBOLGEN:  Some characters in the above value which were subject to macro quoting have been unquoted for printing.
+MLOGIC(MTITLE):  %DO loop index variable I is now 3; loop will iterate again.
+SYMBOLGEN:  && resolves to &.
+SYMBOLGEN:  Macro variable I resolves to 3
+SYMBOLGEN:  Macro variable FOOTN3 resolves to `{super c}Hypersensitivity is determined by the investigator
+SYMBOLGEN:  Macro variable I resolves to 3
+SYMBOLGEN:  Macro variable NUMFOOT resolves to 3
+MLOGIC(MTITLE):  %IF condition &i ^= &numfoot is FALSE
+MLOGIC(MTITLE):  %DO loop index variable I is now 4; loop will not iterate again.
+MPRINT(MTITLE):   footnote1 j=left '' "`{super a}MedDRA version 12.1" '' "`{super b}Relationship to drug is determined by the investigator" '' "`{super 
+c}Hypersensitivity is determined by the investigator";
+MPRINT(MTITLE):   footnote2 " ";
+SYMBOLGEN:  Macro variable FOOTN11 resolves to PROGRAM: rlae.sas, (FINAL) 11JUL2025 00:23
+MPRINT(MTITLE):   footnote3 j=l "PROGRAM: rlae.sas, (FINAL) 11JUL2025 00:23";
+MLOGIC(MTITLE):  Ending execution.
+MPRINT(LISTING):  ;
+MPRINT(LISTING):   footnote1;
+MPRINT(LISTING):   proc report data=ae headline headskip nowindows split='|' missing spacing=2;
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+                                                                         The SAS System
+
+MLOGIC(LISTING):  %IF condition "&progid" ne "lae3" is TRUE
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+MLOGIC(LISTING):  %IF condition "&progid" ne "lae6" is TRUE
+MPRINT(LISTING):   column page usubjid age aespid aename date_str aesev aerel trt_str out_str aeser aehayn ;
+MPRINT(LISTING):   define page / order noprint;
+MPRINT(LISTING):   define usubjid / order 'Subject' style={just=left cellwidth=6%};
+MPRINT(LISTING):   define age / order 'Age|(Years)' format=4.1 style={just=center cellwidth=5%};
+MPRINT(LISTING):   define aespid / order noprint;
+MPRINT(LISTING):   define aename / order 'V: AE Verbatim Term|P: Preferred Term`{super a}|S: System Organ Class' flow style={just=left cellwidth=22%};
+MPRINT(LISTING):   define date_str / display 'Start/Stop Date|Duration(Days)' style={just=left cellwidth=15%};
+MPRINT(LISTING):   define aesev / display 'Severity' style={just=left cellwidth=8%};
+MPRINT(LISTING):   define aerel / display 'Relationship|to Drug`{super b}' style={just=left cellwidth=8%};
+MPRINT(LISTING):   define trt_str / display 'Con Med/|Other Trt?' style={just=left cellwidth=7%};
+MPRINT(LISTING):   define out_str / display 'Outcome (O)/|Action Taken|with Study|Treatment(A)' flow style={just=left cellwidth=15%};
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+MLOGIC(LISTING):  %IF condition "&progid" ne "lae3" is TRUE
+MPRINT(LISTING):   define aeser / display 'Serious?' format=$yesno. style={just=left cellwidth=6%};
+SYMBOLGEN:  Macro variable PROGID resolves to lae1
+MLOGIC(LISTING):  %IF condition "&progid" ne "lae6" is TRUE
+MPRINT(LISTING):   define aehayn / display 'Hyper-|sensitivity`{super c}' format=$yesno. style={just=left cellwidth=7%};
+MPRINT(LISTING):   compute after usubjid / style=[just=left];
+MPRINT(LISTING):   line 143*'_';
+MPRINT(LISTING):   endcomp;
+MPRINT(LISTING):   compute after aename;
+MPRINT(LISTING):   line "  ";
+MPRINT(LISTING):   endcomp;
+MPRINT(LISTING):   compute after page / style=[just=left];
+SYMBOLGEN:  Macro variable FOOTN1 resolves to `{super a}MedDRA version 12.1
+MPRINT(LISTING):   line "`{super a}MedDRA version 12.1";
+SYMBOLGEN:  Macro variable FOOTN2 resolves to `{super b}Relationship to drug is determined by the investigator
+MPRINT(LISTING):   line "`{super b}Relationship to drug is determined by the investigator";
+SYMBOLGEN:  Macro variable FOOTN3 resolves to `{super c}Hypersensitivity is determined by the investigator
+MPRINT(LISTING):   line "`{super c}Hypersensitivity is determined by the investigator";
+SYMBOLGEN:  Macro variable FOOTN4 resolves to  
+MPRINT(LISTING):   line " ";
+MPRINT(LISTING):   line " ";
+SYMBOLGEN:  Macro variable FOOTN11 resolves to PROGRAM: rlae.sas, (FINAL) 11JUL2025 00:23
+MPRINT(LISTING):   line "PROGRAM: rlae.sas, (FINAL) 11JUL2025 00:23";
+MPRINT(LISTING):   endcomp;
+MPRINT(LISTING):   break after page / page;
+MPRINT(LISTING):   run;
+
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: PROCEDURE REPORT used (Total process time):
+      real time           5.43 seconds
+      cpu time            0.79 seconds
+      
+
+                                                                         The SAS System
+
+MPRINT(LISTING):   ods html close;
+MPRINT(LISTING):   ods listing;
+MLOGIC(MPAGEOF):  Beginning execution.
+MLOGIC(MPAGEOF):  This macro was compiled from the autocall file /nfsshare/sashls2/mattb/XMB111/macros/mpageof.sas
+MLOGIC(MPAGEOF):  Parameter INFILE has value "&output/&outputf/&outputname..&type"
+MLOGIC(MPAGEOF):  Parameter OUTFILE has value "&output/&outputf/&outputname..&type"
+MLOGIC(MPAGEOF):  Parameter TYPE has value html
+MLOGIC(MPAGEOF):  Parameter TEXT has value [Page_00000_of_99999]
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MPAGEOF):  %IF condition %upcase(&type)^=LST is TRUE
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MPRINT(MPAGEOF):   ods html close;
+MPRINT(MPAGEOF):   data _null_;
+SYMBOLGEN:  Macro variable INFILE resolves to "&output/&outputf/&outputname..&type"
+SYMBOLGEN:  Macro variable OUTPUT resolves to /nfsshare/sashls2/mattb/XMB111/programs/Output
+SYMBOLGEN:  Macro variable OUTPUTF resolves to listings
+SYMBOLGEN:  Macro variable OUTPUTNAME resolves to a16_02_07_01_lae1
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html" lrecl=32767 end=_eof;
+MPRINT(MPAGEOF):   input;
+SYMBOLGEN:  Macro variable TEXT resolves to [Page_00000_of_99999]
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then pageno + 1;
+MPRINT(MPAGEOF):   if _eof then call symput('NUMPAGES',compress(put(pageno,14.)));
+MPRINT(MPAGEOF):   run;
+
+NOTE: The infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rwxrwxrwx,
+      Last Modified=10Jul2025:17:25:29,
+      File Size (bytes)=181377
+
+NOTE: 4647 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html".
+      The minimum record length was 0.
+      The maximum record length was 376.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MLOGIC(MPAGEOF):  %LOCAL  NUMPAGEL LPAGEOF
+MLOGIC(MPAGEOF):  %LET (variable name is NUMPAGEL)
+SYMBOLGEN:  Macro variable NUMPAGES resolves to 26
+MLOGIC(MPAGEOF):  %LET (variable name is LPAGEOF)
+SYMBOLGEN:  Macro variable TEXT resolves to [Page_00000_of_99999]
+MPRINT(MPAGEOF):   data _null_;
+SYMBOLGEN:  Macro variable INFILE resolves to "&output/&outputf/&outputname..&type"
+SYMBOLGEN:  Macro variable OUTPUT resolves to /nfsshare/sashls2/mattb/XMB111/programs/Output
+                                                                         The SAS System
+
+SYMBOLGEN:  Macro variable OUTPUTF resolves to listings
+SYMBOLGEN:  Macro variable OUTPUTNAME resolves to a16_02_07_01_lae1
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html" lrecl=32767 end=_eof;
+SYMBOLGEN:  Macro variable LPAGEOF resolves to 21
+MPRINT(MPAGEOF):   length pageof $ 21;
+MPRINT(MPAGEOF):   input ;
+SYMBOLGEN:  Macro variable TEXT resolves to [Page_00000_of_99999]
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then do;
+MPRINT(MPAGEOF):   pageno + 1;
+SYMBOLGEN:  Macro variable NUMPAGEL resolves to 2
+SYMBOLGEN:  Macro variable NUMPAGES resolves to 26
+MPRINT(MPAGEOF):   pageof = 'Page '|| put(pageno,2.) ||" of 26";
+MPRINT(MPAGEOF):   pageof = compbl(pageof);
+MPRINT(MPAGEOF):   pageof = right(pageof);
+MPRINT(MPAGEOF):   pad="";
+SYMBOLGEN:  Macro variable TEXT resolves to [Page_00000_of_99999]
+MPRINT(MPAGEOF):   _infile_ = tranwrd(_infile_,"[Page_00000_of_99999]",pageof);
+MPRINT(MPAGEOF):   end;
+SYMBOLGEN:  Macro variable OUTFILE resolves to "&output/&outputf/&outputname..&type"
+SYMBOLGEN:  Macro variable OUTPUT resolves to /nfsshare/sashls2/mattb/XMB111/programs/Output
+SYMBOLGEN:  Macro variable OUTPUTF resolves to listings
+SYMBOLGEN:  Macro variable OUTPUTNAME resolves to a16_02_07_01_lae1
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MPRINT(MPAGEOF):   file "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html" noprint lrecl=32767;
+MPRINT(MPAGEOF):   put _infile_;
+SYMBOLGEN:  Macro variable TYPE resolves to html
+MLOGIC(MPAGEOF):  %IF condition &type=PDF is FALSE
+MPRINT(MPAGEOF):   run;
+
+NOTE: The file/infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rwxrwxrwx,
+      Last Modified=10Jul2025:17:25:29,
+      File Size (bytes)=181377
+
+NOTE: 4647 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html".
+      The minimum record length was 0.
+      The maximum record length was 376.
+NOTE: 4647 records were written to the file "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_07_01_lae1.html".
+      The minimum record length was 0.
+      The maximum record length was 376.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+                                                                         The SAS System
+
+MLOGIC(MPAGEOF):  Ending execution.
+MPRINT(LISTING):  ;
+MLOGIC(LISTING):  Ending execution.
+MPRINT(CHECKMACROVAR):  ;
+645  +%*listing(progid=lae3, subset=%str(aeser='Y'));
+646  +%*listing(progid=lae4, subset=%str(aesev ne 'MILD' and aesev ne 'MODERATE' and aesev ne ''));
+647  +%*listing(progid=lae5, subset=%str(aerel ne '' and aerel ne 'NOT RELATED' and aerel ne 'UNLIKELY RELATED'));
+648  +%*listing(progid=lae6, subset=%str(aehayn='Y'));
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(CHECKMACROVAR):   ods html5 close;
+MPRINT(CHECKMACROVAR):   proc printto;
+MPRINT(CHECKMACROVAR):   run;

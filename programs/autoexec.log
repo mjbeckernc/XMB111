@@ -1,0 +1,215 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+9                                                                        The SAS System                                      Thursday, July 10, 2025 05:25:21 PM
+
+      cpu time            0.00 seconds
+      
+
+SYMBOLGEN:  Macro variable LSTFILENAME resolves to /nfsshare/sashls2/mattb/XMB111/programs/autoexec.html
+MPRINT(CHECKMACROVAR):   ods html5 file="/nfsshare/sashls2/mattb/XMB111/programs/autoexec.html";
+NOTE: Writing HTML5 Body file: /nfsshare/sashls2/mattb/XMB111/programs/autoexec.html
+SYMBOLGEN:  Macro variable SASFILEPATH resolves to /nfsshare/sashls2/mattb/XMB111/programs/autoexec.sas
+NOTE: %INCLUDE (level 1) file /nfsshare/sashls2/mattb/XMB111/programs/autoexec.sas is file /nfsshare/sashls2/mattb/XMB111/programs/autoexec.sas.
+261  +********************************************************************************;
+MPRINT(CHECKMACROVAR):   ********************************************************************************;
+262  +
+263  +***
+264  +*** Program:        XMB111/programs/autoexec.sas
+265  +*** Programmer:     Matt Becker
+266  +*** Date Created:   02Jun2024
+267  +***
+268  +*** Input :         none
+269  +***
+270  +*** Output:         none
+271  +***
+272  +*** Purpose:        Assign project definitions, options, libnames and macro vars
+273  +***
+274  +*** Comments:
+275  +***
+276  +*** Software:       SAS Viya 4
+277  +***
+278  +*** Modifications:
+279  +***
+280  +*** Date       Programmer        Description
+281  +*** ---------  ----------------  --------------
+282  +*** 23Jul2024  matbec            Add a comment
+283  +*** Hi Jim
+284  +*** Hi Vertex Team
+285  +*** Made a change for Joe
+286  +*** Made change with Chris H
+287  +********************************************************************************;
+MPRINT(CHECKMACROVAR):   *** *** Program: XMB111/programs/autoexec.sas *** Programmer: Matt Becker *** Date Created: 02Jun2024 *** *** Input : none *** *** 
+Output: none *** *** Purpose: Assign project definitions, options, libnames and macro vars *** *** Comments: *** *** Software: SAS Viya 4 *** *** 
+Modifications: *** *** Date Programmer Description *** --------- ---------------- -------------- *** 23Jul2024 matbec Add a comment *** Hi Jim *** Hi Vertex 
+Team *** Made a change for Joe *** Made change with Chris H ********************************************************************************;
+288  +cas;
+MPRINT(CHECKMACROVAR):   cas;
+NOTE: The session name identified with the SESSREF= SAS option is connected to Cloud Analytic Services. The default value for SESSREF= is CASAUTO.
+289  +caslib _all_ assign;
+MPRINT(CHECKMACROVAR):   caslib _all_ assign;
+NOTE: A SAS Library associated with a caslib can only reference library member names that conform to SAS Library naming conventions.
+NOTE: CASLIB BIOSPHX for session CASAUTO will be mapped to SAS Library BIOSPHX.
+NOTE: CASLIB CASUSER(matbec) for session CASAUTO will be mapped to SAS Library CASUSER.
+10                                                                       The SAS System                                      Thursday, July 10, 2025 05:25:23 PM
+
+NOTE: CASLIB CDMLOMB for session CASAUTO will be mapped to SAS Library CDMLOMB.
+NOTE: CASLIB ChemL for session CASAUTO will be mapped to SAS Library CHEML.
+NOTE: CASLIB Cohorent_EHR for session CASAUTO will not be mapped to SAS Library Cohorent_EHR. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB Cohort for session CASAUTO will be mapped to SAS Library COHORT.
+NOTE: CASLIB FL for session CASAUTO will be mapped to SAS Library FL.
+NOTE: CASLIB Formats for session CASAUTO will be mapped to SAS Library FORMATS.
+NOTE: CASLIB GOVLAKE for session CASAUTO will be mapped to SAS Library GOVLAKE.
+NOTE: CASLIB HFWA for session CASAUTO will be mapped to SAS Library HFWA.
+NOTE: CASLIB HLS_CDM for session CASAUTO will be mapped to SAS Library HLS_CDM.
+NOTE: CASLIB HLS_CDM_2 for session CASAUTO will not be mapped to SAS Library HLS_CDM_2. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB KY for session CASAUTO will be mapped to SAS Library KY.
+NOTE: CASLIB MAYO for session CASAUTO will be mapped to SAS Library MAYO.
+NOTE: CASLIB MCO_INS for session CASAUTO will be mapped to SAS Library MCO_INS.
+NOTE: CASLIB MDE for session CASAUTO will be mapped to SAS Library MDE.
+NOTE: CASLIB MS for session CASAUTO will be mapped to SAS Library MS.
+NOTE: CASLIB Mendeley for session CASAUTO will be mapped to SAS Library MENDELEY.
+NOTE: CASLIB ModelPerformanceData for session CASAUTO will not be mapped to SAS Library ModelPerformanceData. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB Models for session CASAUTO will be mapped to SAS Library MODELS.
+NOTE: CASLIB PANKAJ for session CASAUTO will be mapped to SAS Library PANKAJ.
+NOTE: CASLIB Public for session CASAUTO will be mapped to SAS Library PUBLIC.
+NOTE: CASLIB RSHIFT for session CASAUTO will be mapped to SAS Library RSHIFT.
+NOTE: CASLIB SAS_API for session CASAUTO will be mapped to SAS Library SAS_API.
+NOTE: CASLIB SNOWFLAKE_SCR_AWS for session CASAUTO will not be mapped to SAS Library SNOWFLAKE_SCR_AWS. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB ST_MAPS for session CASAUTO will be mapped to SAS Library ST_MAPS.
+NOTE: CASLIB Samples for session CASAUTO will be mapped to SAS Library SAMPLES.
+NOTE: CASLIB SnowflakeHosted for session CASAUTO will not be mapped to SAS Library SnowflakeHosted. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB SystemData for session CASAUTO will not be mapped to SAS Library SystemData. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB TCOC for session CASAUTO will be mapped to SAS Library TCOC.
+NOTE: CASLIB TN for session CASAUTO will be mapped to SAS Library TN.
+NOTE: CASLIB XMB111_ADaM for session CASAUTO will not be mapped to SAS Library XMB111_ADaM. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB XMB_SDTM for session CASAUTO will be mapped to SAS Library XMB_SDTM.
+NOTE: CASLIB emplben for session CASAUTO will be mapped to SAS Library EMPLBEN.
+NOTE: CASLIB mass_synthea for session CASAUTO will not be mapped to SAS Library mass_synthea. The CASLIB name is not valid for use as a libref.
+NOTE: CASLIB snowDev for session CASAUTO will be mapped to SAS Library SNOWDEV.
+290  +%global output;
+291  +
+292  +%let pathname=/nfsshare/sashls2/mattb/XMB111;
+293  +%let rootdir=/nfsshare/sashls2/mattb/XMB111;
+294  +
+295  +%let ptitle1=%str(ABCD, Inc.);
+296  +%let ptitle2=%str(XMB-111 Draft);
+297  +%let ddt=&pathname./doc/ddt.xls;
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+298  +%let sdtm=&pathname./doc/sdtm.xls;
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+299  +
+300  +libname raw "&pathname./data/Rawdata";
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+11                                                                       The SAS System                                      Thursday, July 10, 2025 05:25:23 PM
+
+MPRINT(CHECKMACROVAR):   libname raw "/nfsshare/sashls2/mattb/XMB111/data/Rawdata";
+NOTE: Libref RAW was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /nfsshare/sashls2/mattb/XMB111/data/Rawdata
+301  +libname sdtm "&pathname./data/SDTM";
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   libname sdtm "/nfsshare/sashls2/mattb/XMB111/data/SDTM";
+NOTE: Libref SDTM was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /nfsshare/sashls2/mattb/XMB111/data/SDTM
+302  +
+303  +*libname derived "&pathname./data/ADaM";
+MPRINT(CHECKMACROVAR):   *libname derived "&pathname./data/ADaM";
+304  +%sysfunc(ifc(%sysfunc(libref(derived)),libname derived "&pathname./data/ADaM",));
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   ;
+305  +libname psmac   "&pathname./macros" access=read;
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   libname psmac "/nfsshare/sashls2/mattb/XMB111/macros" access=read;
+NOTE: Libref PSMAC was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /nfsshare/sashls2/mattb/XMB111/macros
+306  +libname fmtdata "&pathname./data/ADaM";
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   libname fmtdata "/nfsshare/sashls2/mattb/XMB111/data/ADaM";
+NOTE: Libref FMTDATA refers to the same physical library as LIBRARY.
+NOTE: Libref FMTDATA was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /nfsshare/sashls2/mattb/XMB111/data/ADaM
+307  +libname library "&pathname./data/ADaM";
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   libname library "/nfsshare/sashls2/mattb/XMB111/data/ADaM";
+NOTE: Libref LIBRARY refers to the same physical library as FMTDATA.
+NOTE: Libref LIBRARY was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /nfsshare/sashls2/mattb/XMB111/data/ADaM
+308  +%global rawdata derdata suppkeep;
+309  +%let rawdata=raw;
+310  +%let derdata=derived;
+311  +%let suppkeep=%str(studyid rdomain usubjid idvar idvarval qnam qlabel qval qorig qeval);
+312  +%let output =&pathname./programs/Output;
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+313  +%let program=&pathname./programs/;
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+314  +
+315  +%*** set treatment variables used in MSS, MFREQ;
+316  +%global ovtrt tottrt;
+317  +%let ovtrt=6;
+12                                                                       The SAS System                                      Thursday, July 10, 2025 05:25:23 PM
+
+318  +%let tottrt=6;
+319  +
+320  +*** set global macro vars;
+MPRINT(CHECKMACROVAR):   *** set global macro vars;
+321  +%global study studynum keepdemo draft_final trtspace demovars ps ls;
+322  +%let study=;
+323  +%let studynum=;
+324  +%let keepdemo=;
+325  +%let draft_final=FINAL;
+326  +%let trtspace=4;
+327  +%let demovars=%str(usubjid age atrt rfendtc rfendtn rfstdtn rfstdtc cnstdtn q_safeas q_immuas race sex tbsa);
+328  +%let ps=50;
+329  +%let ls=130;
+330  +options linesize=136 pagesize=50 formchar="|----|+|---+=|-/\<>*";
+MPRINT(CHECKMACROVAR):   options linesize=136 pagesize=50 formchar="|----|+|---+=|-/\<>*";
+331  +options mautosource mrecall missing='';
+MPRINT(CHECKMACROVAR):   options mautosource mrecall missing='';
+332  +options sasautos=("&pathname" "&pathname./macros" sasautos) fmtsearch=(fmtdata raw WORK);
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+SYMBOLGEN:  Macro variable PATHNAME resolves to /nfsshare/sashls2/mattb/XMB111
+MPRINT(CHECKMACROVAR):   options sasautos=("/nfsshare/sashls2/mattb/XMB111" "/nfsshare/sashls2/mattb/XMB111/macros" sasautos) 
+fmtsearch=(fmtdata raw WORK);
+333  +ods path sashelp.tmplmst(read);
+MPRINT(CHECKMACROVAR):   ods path sashelp.tmplmst(read);
+334  +
+335  +* &derdata..matt;
+MPRINT(CHECKMACROVAR):   * &derdata..matt;
+336  +%let options=mprint center ps=45 ls=132;
+337  +%let moptions=macrogen symbolgen /* mlogic */;
+338  +%let topdatef=date9.;
+339  +%let fpgfln=%str(put '\b0\f4\fs16\pard\par '; );
+340  +%let border=%str(\brdrb\brdrs);
+341  +%let ori=l;
+342  +
+343  +*** landscape;
+MPRINT(CHECKMACROVAR):   *** landscape;
+344  +data _null_;
+MPRINT(CHECKMACROVAR):   data _null_;
+345  +	daytim=put("&sysdate"d,date9.)||" "||put("&systime"t,time8.);
+SYMBOLGEN:  Macro variable SYSDATE resolves to 11JUL25
+SYMBOLGEN:  Macro variable SYSTIME resolves to 00:23
+MPRINT(CHECKMACROVAR):   daytim=put("11JUL25"d,date9.)||" "||put("00:23"t,time8.);
+346  +	call symput("nowdate", daytim);
+MPRINT(CHECKMACROVAR):   call symput("nowdate", daytim);
+347  +run;
+MPRINT(CHECKMACROVAR):   run;
+
+NOTE: DATA statement used (Total process time):
+13                                                           The SAS System                          Thursday, July 10, 2025 05:25:23 PM
+
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+348  +
+349  +options VARLENCHK = NOWARN;
+MPRINT(CHECKMACROVAR):   options VARLENCHK = NOWARN;
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(CHECKMACROVAR):   ods html5 close;
+MPRINT(CHECKMACROVAR):   proc printto;
+MPRINT(CHECKMACROVAR):   run;

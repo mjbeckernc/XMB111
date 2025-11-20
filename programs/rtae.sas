@@ -69,7 +69,7 @@ data final;
   by aebodsys &aevar;
   length page 4;
   retain page;
-  if first.&aevar then page=floor(_n_/15)+1;
+  if first.&aevar then page=floor(_n_/7)+1;
   if &aevar='AAAAB' then &aevar="Any AE";
 run;
 
@@ -90,7 +90,7 @@ run;
 proc sort data=final;
   by page aebodsys &aevar;
 
-%mtitle(progid=&progid, type=html);
+%mtitle(progid=&progid, type=rtf);
 
 proc report data=final headline headskip nowindows split='|' missing spacing=1;
   column page aebodsys sorder &aevar ("Age Group (years) \brdrb\brdrs" trt1 trt2 trt3 trt4 trt5) trt6;
@@ -115,14 +115,15 @@ proc report data=final headline headskip nowindows split='|' missing spacing=1;
   endcomp;
 run;
 
-ods html close;
+ods rtf close;
+ods pdf close;
 ods listing;
 
-%mpageof;
+%mpageof(type=rtf);
 
 %if &itprogid ne %then %do;
 
-  %mtitle2(progid=&itprogid, orient=P, type=html);
+  %mtitle2(progid=&itprogid, orient=P, type=rtf);
 
   proc report data=final headline headskip nowindows split='|' missing spacing=1;
     column page sorder &aevar ("Age Group (years) \brdrb\brdrs" trt1 trt2 trt3 trt4) trt6;
@@ -145,7 +146,7 @@ ods listing;
   ods rtf close;
   ods listing;
 
-  %mpageof;
+  %mpageof(type=rtf);
 
 %end;
 
