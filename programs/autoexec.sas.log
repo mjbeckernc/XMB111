@@ -1,0 +1,28 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+22: LINE and COLUMN cannot be determined.
+NOTE 242-205: NOSPOOL is on. Rerunning with OPTION SPOOL might allow recovery of the LINE and COLUMN where the error has occurred.
+ERROR 22-322: Syntax error, expecting one of the following: ;, FILE, LABEL, LOG, NAME, NEW, PRINT, UNIT.  
+76: LINE and COLUMN cannot be determined.
+NOTE: NOSPOOL is on. Rerunning with OPTION SPOOL might allow recovery of the LINE and COLUMN where the error has occurred.
+ERROR 76-322: Syntax error, statement will be ignored.
+MPRINT(BATCHSUB):   proc printto lib=work nolist kill quit;
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+MLOGIC(BATCHSUB):  Ending execution.
+89     %batchsub(prog=d0_dm.sas);
+MLOGIC(BATCHSUB):  Beginning execution.
+MLOGIC(BATCHSUB):  Parameter PROG has value d0_dm.sas
+
+
+SYMBOLGEN:  Macro variable PROG resolves to d0_dm.sas
+MPRINT(BATCHSUB):   proc printto log="/nfsshare/sashls2/mattb/XMB111/programs/d0_dm.sas.log";
+SYMBOLGEN:  Macro variable PROG resolves to d0_dm.sas
+WARNING: Physical file does not exist, /nfsshare/sashls2/mattb/XMB111/programs/d0_dm.sas.sas.
+ERROR: Cannot open %INCLUDE file /nfsshare/sashls2/mattb/XMB111/programs/d0_dm.sas.sas.

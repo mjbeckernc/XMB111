@@ -1,0 +1,9 @@
+Conversion Log: 
+Date:  20NOV2025:13:04:14
+
+Converting sdtm.AE (encoding=wlatin1  Western (Windows)) to UTF-8
+Converting sdtm.CM (encoding=wlatin1  Western (Windows)) to UTF-8
+Converting sdtm.DM (encoding=wlatin1  Western (Windows)) to UTF-8
+Converting sdtm.LB (encoding=utf-8  Unicode (UTF-8)) to UTF-8
+Converting sdtm.SUPPDM (encoding=wlatin1  Western (Windows)) to UTF-8
+Converting sdtm.VS (encoding=wlatin1  Western (Windows)) to UTF-8

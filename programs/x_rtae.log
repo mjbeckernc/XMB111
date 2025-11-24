@@ -1,0 +1,312 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+94    %include "/nfsshare/sashls2/mattb/XMB111/programs/&prog..sas";
+NOTE: Format $ANYROW has been output.
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 99 observations read from the data set DERIVED.AE.
+      WHERE (q_safeas='Y') and (q_bcond not = 'Y') and (aenone not = 'Y') and (aete='Y');
+NOTE: The data set WORK.AE has 254 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set DERIVED.DM.
+NOTE: The data set WORK._FTMP1A has 30 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 30 observations read from the data set WORK._FTMP1A.
+NOTE: The data set WORK._FTMP1 has 79 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 79 observations read from the data set WORK._FTMP1.
+NOTE: The data set WORK._FTMP2 has 6 observations and 3 variables.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 6 observations read from the data set WORK._FTMP2.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+pop1 = 11
+pop2 = 8
+pop3 = 3
+pop4 = 8
+pop5 = 19
+pop6 = 30
+
+NOTE: There were 254 observations read from the data set WORK.AE.
+NOTE: The data set WORK.AE has 762 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 762 observations read from the data set WORK.AE.
+NOTE: 220 observations with duplicate key values were deleted.
+NOTE: The data set WORK.AE has 542 observations and 43 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 542 observations read from the data set WORK.AE.
+NOTE: The data set WORK.MF2 has 209 observations and 5 variables.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 209 observations read from the data set WORK.MF2.
+NOTE: The data set WORK.MF3 has 209 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 209 observations read from the data set WORK.MF3.
+NOTE: The data set WORK.MF5 has 209 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 209 observations read from the data set WORK.MF5.
+NOTE: The data set WORK.MF5 has 209 observations and 8 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 209 observations read from the data set WORK.MF5.
+NOTE: The data set WORK.MF6 has 63 observations and 9 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 63 observations read from the data set WORK.MF6.
+NOTE: The data set WORK.AESTATS has 63 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: There were 63 observations read from the data set WORK.AESTATS.
+NOTE: The data set WORK.AESTATS has 63 observations and 13 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 63 observations read from the data set WORK.AESTATS.
+NOTE: The data set WORK.FINAL has 63 observations and 14 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   options orientation=Landscape;
+
+NOTE: There were 63 observations read from the data set WORK.FINAL.
+NOTE: The data set WORK.FINAL has 63 observations and 14 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   data toc_prog;
+MPRINT(MTITLE):   set derived.toc_prog;
+NOTE: Data file DERIVED.TOC_PROG.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+MPRINT(MTITLE):   if compress(upcase(progid))=upcase("tae1");
+MPRINT(MTITLE):   call symput('tabnum',trim(tabnum));
+MPRINT(MTITLE):   if index(title1,'`{') then offset=9;
+MPRINT(MTITLE):   else offset=0;
+MPRINT(MTITLE):   call symput('title1',trim(title1)||repeat(" 
+",(170-length(title1)-length(tabnum)-75-4+offset))||"[Page_00000_of_99999]");
+MPRINT(MTITLE):   call symput('title2',trim(title2));
+MPRINT(MTITLE):   call symput('title3',trim(title3));
+MPRINT(MTITLE):   call symput('title4',trim(title4));
+MPRINT(MTITLE):   call symput('title5',trim(title5));
+MPRINT(MTITLE):   call symput('title6',trim(title6));
+MPRINT(MTITLE):   call symput('outputname',trim(outname));
+MPRINT(MTITLE):   call symput('numtitle',compress(put(numtitle,3.)));
+MPRINT(MTITLE):   call symput('footn1',trim(footn1));
+MPRINT(MTITLE):   call symput('footn2',trim(footn2));
+MPRINT(MTITLE):   call symput('footn3',trim(footn3));
+MPRINT(MTITLE):   call symput('footn4',trim(footn4));
+MPRINT(MTITLE):   call symput('footn5',trim(footn5));
+MPRINT(MTITLE):   call symput('footn6',trim(footn6));
+MPRINT(MTITLE):   call symput('footn7',trim(footn7));
+MPRINT(MTITLE):   call symput('footn8',trim(footn8));
+MPRINT(MTITLE):   call symput('progname',trim(progname));
+MPRINT(MTITLE):   if l_source ne '' then footn11="PROGRAM: " || trim(progname) || ".sas, " || "SOURCE: " || trim(l_source) || ", 
+(FINAL) 24NOV2025 15:51";
+MPRINT(MTITLE):   else footn11="PROGRAM: " || trim(progname) || ".sas, (FINAL) 24NOV2025 15:51";
+MPRINT(MTITLE):   footn11l=trim(footn11);
+MPRINT(MTITLE):   call symput('footn11',trim(footn11l));
+MPRINT(MTITLE):   call symput('numfoot',compress(put(numfoot,3.)));
+MPRINT(MTITLE):   if index(tabnum,'Table') then call symput('outputf','tables');
+MPRINT(MTITLE):   else if index(tabnum,'Appendix') then call symput('outputf','listings');
+MPRINT(MTITLE):   else if index(tabnum,'Figure') then call symput('outputf','figures');
+MPRINT(MTITLE):   run;
+
+NOTE: There were 110 observations read from the data set DERIVED.TOC_PROG.
+NOTE: The data set WORK.TOC_PROG has 1 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   proc sql noprint;
+MPRINT(MTITLE):   select count(*) into: numobs from toc_prog;
+MPRINT(MTITLE):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   ods listing close;
+MPRINT(MTITLE):   ods path sashelp.tmplmst;
+MPRINT(MTITLE):   *&derdata..matt;
+MPRINT(MTITLE):   ods rtf file="/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" style=rtf headery=1700 
+footery=1190 bodytitle;
+NOTE: Writing RTF Body file: /nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf
+MPRINT(MTITLE):   ods escapechar='`';
+MPRINT(MTITLE):   options linesize=160 pagesize=50;
+MPRINT(MTITLE):   title1 j=l "ABCD, Inc.";
+MPRINT(MTITLE):   title2 j=l "XMB-111 Draft";
+MPRINT(MTITLE):   title4 j=l "Table 14.3.1-5:  Adverse Events by System Organ Class and Preferred Term                       [Page_00000_of_99999]";
+WARNING: The FOOTNOTE statement is ambiguous due to invalid options or unquoted text.
+MPRINT(MTITLE):   footnote1 j=left '' "`{super a}MedDRA version 12.1";
+MPRINT(MTITLE):   footnote2 " ";
+MPRINT(MTITLE):   footnote3 j=l "PROGRAM: rtae.sas, (FINAL) 24NOV2025 15:51";
+MPRINT(RTAE):  ;
+MPRINT(RTAE):   proc report data=final headline headskip nowindows split='|' missing spacing=1;
+MPRINT(RTAE):   column page aebodsys sorder aedecod ("Age Group (years) \brdrb\brdrs" trt1 trt2 trt3 trt4 trt5) trt6;
+MPRINT(RTAE):   define page /order noprint;
+MPRINT(RTAE):   define aebodsys /order "SOC`{super a}" format=$anyrow. style={just=l cellwidth=20%};
+MPRINT(RTAE):   define sorder /order noprint;
+MPRINT(RTAE):   define aedecod / "Preferred Term`{super a}" format=$anyrow. style={just=l cellwidth=20%};
+MPRINT(RTAE):   define trt1 / "     0 - 2 |     (N=11)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   define trt2 / "     3 - 6 |     (N=8)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   define trt3 / "     7 - 11 |     (N=3)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   define trt4 / "     12 - 17 |     (N=8)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   define trt5 / "     3 - 17 Total |     (N=19)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   define trt6 / "     Total |     (N=30)|     n (%)" style={cellwidth=8%};
+MPRINT(RTAE):   break after page / page;
+MPRINT(RTAE):   compute before aebodsys;
+MPRINT(RTAE):   line " ";
+MPRINT(RTAE):   endcomp;
+MPRINT(RTAE):   run;
+
+NOTE: There were 63 observations read from the data set WORK.FINAL.
+NOTE: PROCEDURE REPORT used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(RTAE):   ods rtf close;
+MPRINT(RTAE):   ods pdf close;
+MPRINT(RTAE):   ods listing;
+MPRINT(MPAGEOF):   ods rtf close;
+MPRINT(MPAGEOF):   data _null_;
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" lrecl=32767 end=_eof;
+MPRINT(MPAGEOF):   input;
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then pageno + 1;
+MPRINT(MPAGEOF):   if _eof then call symput('NUMPAGES',compress(put(pageno,14.)));
+MPRINT(MPAGEOF):   run;
+
+NOTE: The infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rw-r--r--,
+      Last Modified=24Nov2025:15:51:38,
+      File Size (bytes)=142297
+
+NOTE: 1834 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(MPAGEOF):   data _null_;
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" lrecl=32767 end=_eof;
+MPRINT(MPAGEOF):   length pageof $ 21;
+MPRINT(MPAGEOF):   input ;
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then do;
+MPRINT(MPAGEOF):   pageno + 1;
+MPRINT(MPAGEOF):   pageof = 'Page '|| put(pageno,2.) ||" of 10";
+MPRINT(MPAGEOF):   pageof = compbl(pageof);
+MPRINT(MPAGEOF):   pageof = right(pageof);
+MPRINT(MPAGEOF):   pad="";
+MPRINT(MPAGEOF):   _infile_ = tranwrd(_infile_,"[Page_00000_of_99999]",pageof);
+MPRINT(MPAGEOF):   end;
+MPRINT(MPAGEOF):   file "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" noprint lrecl=32767;
+MPRINT(MPAGEOF):   put _infile_;
+MPRINT(MPAGEOF):   run;
+
+NOTE: The file/infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rw-r--r--,
+      Last Modified=24Nov2025:15:51:38,
+      File Size (bytes)=142297
+
+NOTE: 1834 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: 1834 records were written to the file "/nfsshare/sashls2/mattb/XMB111/programs/Output/tables/t14_03_01_05_tae1.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(RTAE):  ;

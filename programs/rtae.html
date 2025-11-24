@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html class="ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="SAS V.04.00" name="generator"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data: ;"/>
+<title>Results:rtae.sas</title>
+<style>
+/*<![CDATA[*/
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c section > table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c section > pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c div > table,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c div > pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c article > table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c article > pre,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j section > table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j section > pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j div > table,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j div > pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j article > table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j article > pre,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c p.note, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c p.fatal,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j p.note, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j p.fatal,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.c > table.layoutcontainer, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body.j > table.layoutcontainer { margin-left: auto; margin-right: auto }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l p.note,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.l p.fatal { margin-left: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c p.note,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.c p.fatal { margin-left: auto; margin-right: auto }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r p.note,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r table, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r pre, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r p.note,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion.r p.fatal { margin-right: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 article, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 aside, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 details, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 figcaption, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 figure, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 footer, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 header, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 hgroup, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 nav, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 section { display: block }
+html.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 { font-size: 100% }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body { margin: 1em; font-size: 13px; line-height: 1.231 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 sup { position: relative; vertical-align: baseline; bottom: 0.25em; font-size: 0.8em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 sub { position: relative; vertical-align: baseline; top: 0.25em; font-size: 0.8em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 ul, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 ol { margin: 1em 0; padding: 0 0 0 40px }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 dd { margin: 0 0 0 40px }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 nav ul, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 img { border: 0; vertical-align: middle }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 svg:not(:root) { overflow: hidden }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 figure { margin: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 table { border-collapse: collapse; border-spacing: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutcontainer { border-collapse: separate; border-spacing: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p { margin-top: 0; text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h1.heading1 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h2.heading2 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h3.heading3 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h4.heading4 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h5.heading5 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 h6.heading6 { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 span { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 table { margin-bottom: 1em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 td, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 th { text-align: left; padding: 3px 6px; vertical-align: top }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 td[class$="fixed"], .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 th[class$="fixed"] { white-space: pre }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 section, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 article { padding-top: 1px; padding-bottom: 8px }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 hr.pagebreak { height: 0px; border: 0; border-bottom: 1px solid #c0c0c0; margin: 1em 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .stacked-value { text-align: left; display: block }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .stacked-cell > .stacked-value, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 td.data > td.data, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 th.data > td.data, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 th.data > th.data, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 td.data > th.data, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 th.header > th.header { border: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .stacked-cell > div.data { border-width: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer { white-space: nowrap; margin-bottom: 1em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > p { margin: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > p > span { display: inline-block; width: 100%; white-space: normal }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch { display: table }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .toc { display: none }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .proc_note_group, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .proc_title_group { margin-bottom: 1em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p.proctitle { margin: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p.note, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p.warning, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p.error, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 p.fatal { display: table }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notebanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warnbanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorbanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalbanner,
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notecontent, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warncontent, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorcontent, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalcontent { display: table-cell; padding: 0.5em }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notebanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warnbanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorbanner, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalbanner { padding-right: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body > div > ol li { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .beforecaption > h4 { margin-top: 0; margin-bottom: 0 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .c { text-align: center }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .r { text-align: right }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .l { text-align: left }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .j { text-align: justify }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .d { text-align: right }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .b { vertical-align: bottom }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .m { vertical-align: middle }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .t { vertical-align: top }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .accessiblecaption {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 a:active { color: #626f80 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .aftercaption {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 4pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch > colgroup {
+    border-left: 1px solid #1d2025;
+    border-right: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch > tfoot {
+    border-top: 1px solid #1d2025;
+    border-bottom: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch { border: hidden; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .batch {
+    background-color: #ffffff;
+    border: 1px solid #1d2025;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'SAS Monospace', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    padding: 7px;
+    }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .beforecaption {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .body {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bodydate {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bycontentfolder {
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .byline {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > colgroup > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > colgroup, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > * > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer > tfoot { border: none; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .bylinecontainer {
+    background-color: #ffffff;
+    border: none;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .caption {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .cell, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .container {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contentfolder, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contentitem {
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contentproclabel, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contentprocname {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contents {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contentsdate {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .contenttitle {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .continued {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .data {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .dataemphasis {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .dataemphasisfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .dataempty {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .datafixed {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .datastrong {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .datastrongfixed {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .date {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .document {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorbanner {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorcontent {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .errorcontentfixed {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .extendedpage {
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1pt;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+    text-align: center;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalbanner {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalcontent {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .fatalcontentfixed {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .folderaction {
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footer {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footeremphasis {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footeremphasisfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footerempty {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footerfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footerstrong {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .footerstrongfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .frame {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph > colgroup {
+    border-left: 1px solid #1d2025;
+    border-right: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph > tfoot {
+    border-top: 1px solid #1d2025;
+    border-bottom: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph { border: hidden; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .graph {
+    background-color: #ffffff;
+    border: 1px solid #1d2025;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .header {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headeremphasis {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headeremphasisfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headerempty {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headerfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headersandfooters {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headerstrong {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .headerstrongfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading1 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 34pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading2 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 27pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading3 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 21pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading4 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 17pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading5 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 11pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .heading6 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .index {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .indexaction, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .indexitem {
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .indexprocname {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .indextitle {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutcontainer, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .layoutregion {
+    border-width: 0;
+    border-spacing: 30px;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .linecontent {
+    background-color: #ffffff;
+    border: 1px solid #ebedef;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 a:link { color: #525f70 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list10 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list2 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list3, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list4, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list5, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list6, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list7, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list8, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .list9 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem10 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem2 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem3, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem4, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem5, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem6, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem7, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem8, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .listitem9 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .note {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notebanner {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notecontent {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .notecontentfixed {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output > colgroup {
+    border-left: 1px solid #1d2025;
+    border-right: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output > tfoot {
+    border-top: 1px solid #1d2025;
+    border-bottom: 1px solid #1d2025;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output { border: hidden; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .output {
+    background-color: #ffffff;
+    border: 1px solid #1d2025;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pageno {
+    background-color: #ffffff;
+    border-spacing: 0;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pages {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pagesdate {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pagesitem {
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pagesproclabel, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pagesprocname {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .pagestitle {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .paragraph {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > colgroup > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > colgroup, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > * > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip > tfoot { border: none; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .parskip {
+    border: none;
+    border-spacing: 0;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+    }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .prepage {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .proctitle {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .proctitlefixed {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooter {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooteremphasis {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooteremphasisfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooterempty {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooterfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooterstrong {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowfooterstrongfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheader {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderemphasis {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderemphasisfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderempty {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderstrong {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .rowheaderstrongfixed {
+    background-color: #ffffff;
+    border: 1px solid #dddfe4;
+    color: #1d2025;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter10, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter2, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter3, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter4, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter5, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter6, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter7, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter8, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemfooter9 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle10, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle2, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle3, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle4, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle5, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle6, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle7, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle8, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systemtitle9 {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 13.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > colgroup > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > colgroup, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > * > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer > tfoot { border: none; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .systitleandfootercontainer {
+    background-color: #ffffff;
+    border: none;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table > colgroup > col {
+    border-left: 1px solid #c1c1c1;
+    border-right: 0 solid #c1c1c1;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table > * > tr {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 0 solid #c1c1c1;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table { border: hidden; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .table {
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > colgroup > col, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > colgroup, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > * > tr, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > thead, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > tbody, .ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer > tfoot { border: none; }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titleandnotecontainer {
+    background-color: #ffffff;
+    border: none;
+    border-spacing: 1px;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .titlesandfooters {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 9pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .usertext {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 a:visited { color: #626f80 }
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warnbanner {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warncontent {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Anova UI', Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: 10.5pt;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_9629190D-1EF6-1D48-A02B-07BF8D4BA858 .warncontentfixed {
+    background-color: #ffffff;
+    color: #1d2025;
+    font-family: 'Courier New', Courier;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+/*]]>*/
+</style>
+</head>
+<body class="body">
+<div id="div_9629190D-1EF6-1D48-A02B-07BF8D4BA858" class="c body">
+<h1 class="body toc">Results:rtae.sas</h1>
+</div>
+</body>
+</html>

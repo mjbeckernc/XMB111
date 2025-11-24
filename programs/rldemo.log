@@ -1,0 +1,213 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+94    %include "/nfsshare/sashls2/mattb/XMB111/programs/&prog..sas";
+NOTE: Data file SDTM.VS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 60 observations read from the data set SDTM.VS.
+      WHERE (visitnum=0) and vstestcd in ('ORNHT', 'ORNWT');
+NOTE: The data set WORK.VS has 60 observations and 17 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 60 observations read from the data set WORK.VS.
+NOTE: The data set WORK.TRANVS has 30 observations and 4 variables.
+NOTE: PROCEDURE TRANSPOSE used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file SDTM.DM.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set SDTM.DM.
+NOTE: The data set WORK.DM has 32 observations and 14 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      2 at 134:8    2 at 134:20   2 at 134:28   
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.TRANVS.
+NOTE: The data set WORK.DM has 32 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file SDTM.SUPPDM.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set SDTM.SUPPDM.
+      WHERE qnam='INIT';
+NOTE: The data set WORK.SUPPDM has 32 observations and 2 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 32 observations read from the data set WORK.SUPPDM.
+NOTE: The data set WORK.DM has 32 observations and 20 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+AGEU
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set WORK.DM has 32 observations and 20 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(MTITLE):   options orientation=Landscape;
+MPRINT(MTITLE):   data toc_prog;
+MPRINT(MTITLE):   set derived.toc_prog;
+NOTE: Data file DERIVED.TOC_PROG.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+MPRINT(MTITLE):   if compress(upcase(progid))=upcase("ldemo");
+MPRINT(MTITLE):   call symput('tabnum',trim(tabnum));
+MPRINT(MTITLE):   if index(title1,'`{') then offset=9;
+MPRINT(MTITLE):   else offset=0;
+MPRINT(MTITLE):   call symput('title1',trim(title1)||repeat(" 
+",(170-length(title1)-length(tabnum)-75-4+offset))||"[Page_00000_of_99999]");
+MPRINT(MTITLE):   call symput('title2',trim(title2));
+MPRINT(MTITLE):   call symput('title3',trim(title3));
+MPRINT(MTITLE):   call symput('title4',trim(title4));
+MPRINT(MTITLE):   call symput('title5',trim(title5));
+MPRINT(MTITLE):   call symput('title6',trim(title6));
+MPRINT(MTITLE):   call symput('outputname',trim(outname));
+MPRINT(MTITLE):   call symput('numtitle',compress(put(numtitle,3.)));
+MPRINT(MTITLE):   call symput('footn1',trim(footn1));
+MPRINT(MTITLE):   call symput('footn2',trim(footn2));
+MPRINT(MTITLE):   call symput('footn3',trim(footn3));
+MPRINT(MTITLE):   call symput('footn4',trim(footn4));
+MPRINT(MTITLE):   call symput('footn5',trim(footn5));
+MPRINT(MTITLE):   call symput('footn6',trim(footn6));
+MPRINT(MTITLE):   call symput('footn7',trim(footn7));
+MPRINT(MTITLE):   call symput('footn8',trim(footn8));
+MPRINT(MTITLE):   call symput('progname',trim(progname));
+MPRINT(MTITLE):   if l_source ne '' then footn11="PROGRAM: " || trim(progname) || ".sas, " || "SOURCE: " || trim(l_source) || ", 
+(FINAL) 24NOV2025 15:47";
+MPRINT(MTITLE):   else footn11="PROGRAM: " || trim(progname) || ".sas, (FINAL) 24NOV2025 15:47";
+MPRINT(MTITLE):   footn11l=trim(footn11);
+MPRINT(MTITLE):   call symput('footn11',trim(footn11l));
+MPRINT(MTITLE):   call symput('numfoot',compress(put(numfoot,3.)));
+MPRINT(MTITLE):   if index(tabnum,'Table') then call symput('outputf','tables');
+MPRINT(MTITLE):   else if index(tabnum,'Appendix') then call symput('outputf','listings');
+MPRINT(MTITLE):   else if index(tabnum,'Figure') then call symput('outputf','figures');
+MPRINT(MTITLE):   run;
+
+NOTE: There were 110 observations read from the data set DERIVED.TOC_PROG.
+NOTE: The data set WORK.TOC_PROG has 1 observations and 27 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   proc sql noprint;
+MPRINT(MTITLE):   select count(*) into: numobs from toc_prog;
+MPRINT(MTITLE):   quit;
+NOTE: PROCEDURE SQL used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MTITLE):   ods listing close;
+MPRINT(MTITLE):   ods path sashelp.tmplmst;
+MPRINT(MTITLE):   *&derdata..matt;
+MPRINT(MTITLE):   ods rtf file="/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" style=rtf headery=1700 
+footery=1190 bodytitle;
+NOTE: Writing RTF Body file: /nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf
+MPRINT(MTITLE):   ods escapechar='`';
+MPRINT(MTITLE):   options linesize=160 pagesize=50;
+MPRINT(MTITLE):   title1 j=l "ABCD, Inc.";
+MPRINT(MTITLE):   title2 j=l "XMB-111 Draft";
+MPRINT(MTITLE):   title4 j=l "Appendix 16.2.4-1:  Demographics and Subject Characteristics                                   [Page_00000_of_99999]";
+WARNING: The FOOTNOTE statement is ambiguous due to invalid options or unquoted text.
+MPRINT(MTITLE):   footnote1 j=left '' "`{super a}Total Body Surface Area (mL/m`{super 2}) = square root of [Ht (cm) * Wt (kg) divided by 3600]";
+MPRINT(MTITLE):   footnote2 " ";
+MPRINT(MTITLE):   footnote3 j=l "PROGRAM: rldemo.sas, (FINAL) 24NOV2025 15:47";
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: PROCEDURE REPORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(MPAGEOF):   ods rtf close;
+MPRINT(MPAGEOF):   data _null_;
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" lrecl=32767 end=_eof;
+MPRINT(MPAGEOF):   input;
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then pageno + 1;
+MPRINT(MPAGEOF):   if _eof then call symput('NUMPAGES',compress(put(pageno,14.)));
+MPRINT(MPAGEOF):   run;
+
+NOTE: The infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rw-r--r--,
+      Last Modified=24Nov2025:15:47:20,
+      File Size (bytes)=73062
+
+NOTE: 933 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+MPRINT(MPAGEOF):   data _null_;
+MPRINT(MPAGEOF):   infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" lrecl=32767 end=_eof;
+MPRINT(MPAGEOF):   length pageof $ 21;
+MPRINT(MPAGEOF):   input ;
+MPRINT(MPAGEOF):   if index(_infile_,"[Page_00000_of_99999]") then do;
+MPRINT(MPAGEOF):   pageno + 1;
+MPRINT(MPAGEOF):   pageof = 'Page '|| put(pageno,1.) ||" of 5";
+MPRINT(MPAGEOF):   pageof = compbl(pageof);
+MPRINT(MPAGEOF):   pageof = right(pageof);
+MPRINT(MPAGEOF):   pad="";
+MPRINT(MPAGEOF):   _infile_ = tranwrd(_infile_,"[Page_00000_of_99999]",pageof);
+MPRINT(MPAGEOF):   end;
+MPRINT(MPAGEOF):   file "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" noprint lrecl=32767;
+MPRINT(MPAGEOF):   put _infile_;
+MPRINT(MPAGEOF):   run;
+
+NOTE: The file/infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf" is:
+      Filename=/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf,
+      Owner Name=UNKNOWN,Group Name=UNKNOWN,
+      Access Permission=-rw-r--r--,
+      Last Modified=24Nov2025:15:47:20,
+      File Size (bytes)=73062
+
+NOTE: 933 records were read from the infile "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: 933 records were written to the file "/nfsshare/sashls2/mattb/XMB111/programs/Output/listings/a16_02_04_01_ldemo.rtf".
+      The minimum record length was 0.
+      The maximum record length was 194.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+

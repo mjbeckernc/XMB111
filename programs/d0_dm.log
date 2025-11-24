@@ -1,0 +1,612 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+94    %include "/nfsshare/sashls2/mattb/XMB111/programs/&prog..sas";
+NOTE: Data file RAW.DM.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.DM.
+NOTE: The data set WORK.DM has 32 observations and 30 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set WORK.DM has 32 observations and 30 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.SDA.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.SDA.
+      WHERE exyn='Y';
+NOTE: The data set WORK.SDA has 30 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 30 observations read from the data set WORK.SDA.
+NOTE: The data set WORK.SDA has 30 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.SDA.
+NOTE: The data set WORK.DM has 32 observations and 32 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.DS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.DS.
+      WHERE dsdecod not in (11, 12);
+NOTE: The data set WORK.DS has 30 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.DS.
+NOTE: The data set WORK.DM has 32 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.OE.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.OE.
+      WHERE cnstdtn not = .;
+NOTE: The data set WORK.OE has 32 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.OE.
+NOTE: The data set WORK.OE has 32 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      2 at 206:21   2 at 206:31   
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 32 observations read from the data set WORK.OE.
+NOTE: The data set WORK.DM has 32 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file RAW.DS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.DS.
+NOTE: The data set WORK.DS has 32 observations and 7 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 32 observations read from the data set WORK.DS.
+NOTE: The data set WORK.DM has 32 observations and 48 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file RAW.SPC.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 58 observations read from the data set RAW.SPC.
+      WHERE spyn='Y';
+NOTE: The data set WORK.SPC has 58 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 58 observations read from the data set WORK.SPC.
+NOTE: The data set WORK.SPC has 30 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.SPC.
+NOTE: The data set WORK.DM has 32 observations and 50 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.VS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.VS.
+      WHERE visit=0;
+NOTE: The data set WORK.VS has 30 observations and 6 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      2 at 267:8    2 at 267:20   2 at 267:28   
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.VS.
+NOTE: The data set WORK.DM has 32 observations and 57 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: The UUID '9e7f01bb-dc43-b741-86e6-b618f67a2dfa' is connected using session CASAUTO.
+NOTE: The Cloud Analytic Services server processed the request in 0.011151 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: The UUID '9e7f01bb-dc43-b741-86e6-b618f67a2dfa' is connected using session CASAUTO.
+NOTE: DERIVED.DM was successfully added to the "Public" caslib as "XMB111_DM".
+NOTE: Cloud Analytic Services promoted table XMB111_DM in caslib Public to table XMB111_DM in caslib public.
+NOTE: The Cloud Analytic Services server processed the request in 0.0138 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: One or more variables were converted because the data type is not supported by the V9 engine. For more details, run with options 
+      MSGLEVEL=I.
+NOTE: The import data set has 356 observations and 9 variables.
+NOTE: WORK.ODDT data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 42 observations read from the data set WORK.ODDT.
+      WHERE filename='DM';
+NOTE: The data set WORK.XLS has 42 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 42 observations read from the data set WORK.XLS.
+NOTE: The data set WORK.CE has 42 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: CALL EXECUTE generated line.
+1   + data derived.dm (label='Study Identifier');
+2   + attrib DOMAIN   label='Domain Abbreviation' length=$2 format=$2.;
+3   + attrib USUBJID  label='Unique Subject Identifier' length=$25 format=$25.;
+4   + attrib SUBJID   label='Subject Identifier for the Study' length=$15 format=$15.;
+5   + attrib AGE      label='Age' length=8 format=8.1;
+6   + attrib AGEU     label='Age Units' length=$10 format=$10.;
+7   + attrib ARM      label='Description of Planned Arm' length=$20 format=$20.;
+8   + attrib ARMCD    label='Planned Arm Code' length=$8 format=$8.;
+9   + attrib ATRT     label='Age Group - numeric' length=8 format=8.;
+10  + attrib BRTHDTC  label='Date/Time of Birth' length=$10 format=$10.;
+11  + attrib BRTHDTN  label='Date/Time of Birth (Numeric)' length=8 format=DATE9.;
+12  + attrib CNSTDTN  label='Date of Informed Consent' length=8 format=DATE9.;
+13  + attrib COUNTRY  label='Country' length=$3 format=$3.;
+14  + attrib DMDTC    label='Date/Time of Collection' length=$10 format=$10.;
+15  + attrib DMDTN    label='Date/Time of Collection (Numeric)' length=8 format=DATE9.;
+16  + attrib DMDY     label='Study Day of Collection' length=8 format=12.;
+17  + attrib DSDECOD  label='Primary Reason for Not Completing Study' length=$28 format=$28.;
+18  + attrib DSDECODN label='Primary Reason for Not Completing Study' length=8 format=8.;
+19  + attrib HEIGHT   label='Height (cm)' length=8 format=8.2;
+20  + attrib MEDRECD  label='Reason(s) Study Drug Not Received' length=$100 format=$100.;
+21  + attrib MEDRECN  label='Reason(s) Study Drug Not Received (Numer' length=8 format=8.;
+22  + attrib Q_COMP   label='Completed Study?' length=$1 format=$1.;
+23  + attrib Q_ELIGMD label='Eligible But Did Not Receive Study Med' length=$1 format=$1.;
+24  + attrib Q_IMMUAS label='Evaluable for Immunogenicity Analysis' length=$1 format=$1.;
+25  + attrib Q_INFCST label='Provided Informed Consent' length=$1 format=$1.;
+26  + attrib Q_NOTELI label='Informed Consent But Ineligible' length=$1 format=$1.;
+27  + attrib Q_OEELIG label='Met All Eligibility Criteria?' length=$1 format=$1.;
+28  + attrib Q_SAFEAS label='Evaluable for Safety Analysis' length=$1 format=$1.;
+29  + attrib RACE     label='Race' length=$100 format=$100.;
+30  + attrib RANDOMNO label='Randomized Subject Number' length=$4 format=$4.;
+31  + attrib RFENDTC  label='Subject Reference End Date/Time' length=$14 format=$14.;
+32  + attrib RFENDTN  label='Subject Reference End Date/Time (Numeric' length=8 format=DATE9.;
+33  + attrib RFSTDTC  label='Subject Reference Start Date/Time' length=$14 format=$14.;
+34  + attrib RFSTDTN  label='Subject Reference Start Date/Time (Numer' length=8 format=DATE9.;
+35  + attrib SEX      label='Sex' length=$1 format=$1.;
+36  + attrib SEXN     label='Sex (Numeric)' length=4 format=SEXF.;
+37  + attrib SITEID   label='Study Site Identifier' length=$5 format=$5.;
+38  + attrib TBSA     label='Total Body Surface Area (TBSA)' length=8 format=8.2;
+39  + attrib VISIT    label='Visit' length=8 format=8.;
+40  + attrib WEIGHT   label='Weight (kg)' length=8 format=8.2;
+41  + attrib X_RACE   label='Race (Numeric)' length=8 format=RACEF.;
+42  + attrib X_RACEOT label='Race - Other Specify' length=$70 format=$70.;
+43  + set dm;
+44  + keep STUDYID DOMAIN USUBJID SUBJID AGE AGEU ARM ARMCD ATRT BRTHDTC BRTHDTN CNSTDTN COUNTRY DMDTC DMDTN DMDY DSDECOD DSDECODN 
+HEIGHT MEDRECD MEDRECN Q_COMP Q_ELIGMD Q_IMMUAS Q_INFCST Q_NOTELI Q_OEELIG Q_SAFEAS RACE RANDOMNO RFENDTC RFENDTN RFSTDTC RFSTDTN
+45  + SEX SEXN SITEID TBSA VISIT WEIGHT X_RACE X_RACEOT
+46  +
+47  +                                                                                                                                   
+                                                                                                              ;
+48  + run;
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set DERIVED.DM has 32 observations and 42 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set DERIVED.DM.
+NOTE: The data set DERIVED.DM has 32 observations and 42 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Deleting WORK.CE (memtype=DATA).
+NOTE: Deleting WORK.DM (memtype=DATA).
+NOTE: Deleting WORK.DS (memtype=DATA).
+NOTE: Deleting WORK.ODDT (memtype=DATA).
+NOTE: Deleting WORK.OE (memtype=DATA).
+NOTE: Deleting WORK.REGSTRY (memtype=ITEMSTOR).
+NOTE: File WORK.REGSTRY (memtype=ITEMSTOR) cannot be deleted because it is in use.
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+NOTE: Deleting WORK.SDA (memtype=DATA).
+NOTE: Deleting WORK.SPC (memtype=DATA).
+NOTE: Deleting WORK.VS (memtype=DATA).
+NOTE: Deleting WORK.XLS (memtype=DATA).
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+94    %include "/nfsshare/sashls2/mattb/XMB111/programs/&prog..sas";
+NOTE: Data file RAW.DM.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.DM.
+NOTE: The data set WORK.DM has 32 observations and 30 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set WORK.DM has 32 observations and 30 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.SDA.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.SDA.
+      WHERE exyn='Y';
+NOTE: The data set WORK.SDA has 30 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 30 observations read from the data set WORK.SDA.
+NOTE: The data set WORK.SDA has 30 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.SDA.
+NOTE: The data set WORK.DM has 32 observations and 32 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.DS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.DS.
+      WHERE dsdecod not in (11, 12);
+NOTE: The data set WORK.DS has 30 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.DS.
+NOTE: The data set WORK.DM has 32 observations and 34 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.OE.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.OE.
+      WHERE cnstdtn not = .;
+NOTE: The data set WORK.OE has 32 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.OE.
+NOTE: The data set WORK.OE has 32 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      2 at 206:21   2 at 206:31   
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 32 observations read from the data set WORK.OE.
+NOTE: The data set WORK.DM has 32 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.DS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 32 observations read from the data set RAW.DS.
+NOTE: The data set WORK.DS has 32 observations and 7 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 32 observations read from the data set WORK.DS.
+NOTE: The data set WORK.DM has 32 observations and 48 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file RAW.SPC.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 58 observations read from the data set RAW.SPC.
+      WHERE spyn='Y';
+NOTE: The data set WORK.SPC has 58 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 58 observations read from the data set WORK.SPC.
+NOTE: The data set WORK.SPC has 30 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.SPC.
+NOTE: The data set WORK.DM has 32 observations and 50 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file RAW.VS.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 30 observations read from the data set RAW.VS.
+      WHERE visit=0;
+NOTE: The data set WORK.VS has 30 observations and 6 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      2 at 267:8    2 at 267:20   2 at 267:28   
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: There were 30 observations read from the data set WORK.VS.
+NOTE: The data set WORK.DM has 32 observations and 57 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: The UUID 'cd1b36ac-f544-9548-af50-da9b3f6b8be9' is connected using session CASAUTO.
+NOTE: The Cloud Analytic Services server processed the request in 0.010139 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: The UUID 'cd1b36ac-f544-9548-af50-da9b3f6b8be9' is connected using session CASAUTO.
+NOTE: DERIVED.DM was successfully added to the "Public" caslib as "XMB111_DM".
+NOTE: Cloud Analytic Services promoted table XMB111_DM in caslib Public to table XMB111_DM in caslib public.
+NOTE: The Cloud Analytic Services server processed the request in 0.011943 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: One or more variables were converted because the data type is not supported by the V9 engine. For more details, run with options 
+      MSGLEVEL=I.
+NOTE: The import data set has 356 observations and 9 variables.
+NOTE: WORK.ODDT data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 42 observations read from the data set WORK.ODDT.
+      WHERE filename='DM';
+NOTE: The data set WORK.XLS has 42 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 42 observations read from the data set WORK.XLS.
+NOTE: The data set WORK.CE has 42 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: CALL EXECUTE generated line.
+1   + data derived.dm (label='Study Identifier');
+2   + attrib DOMAIN   label='Domain Abbreviation' length=$2 format=$2.;
+3   + attrib USUBJID  label='Unique Subject Identifier' length=$25 format=$25.;
+4   + attrib SUBJID   label='Subject Identifier for the Study' length=$15 format=$15.;
+5   + attrib AGE      label='Age' length=8 format=8.1;
+6   + attrib AGEU     label='Age Units' length=$10 format=$10.;
+7   + attrib ARM      label='Description of Planned Arm' length=$20 format=$20.;
+8   + attrib ARMCD    label='Planned Arm Code' length=$8 format=$8.;
+9   + attrib ATRT     label='Age Group - numeric' length=8 format=8.;
+10  + attrib BRTHDTC  label='Date/Time of Birth' length=$10 format=$10.;
+11  + attrib BRTHDTN  label='Date/Time of Birth (Numeric)' length=8 format=DATE9.;
+12  + attrib CNSTDTN  label='Date of Informed Consent' length=8 format=DATE9.;
+13  + attrib COUNTRY  label='Country' length=$3 format=$3.;
+14  + attrib DMDTC    label='Date/Time of Collection' length=$10 format=$10.;
+15  + attrib DMDTN    label='Date/Time of Collection (Numeric)' length=8 format=DATE9.;
+16  + attrib DMDY     label='Study Day of Collection' length=8 format=12.;
+17  + attrib DSDECOD  label='Primary Reason for Not Completing Study' length=$28 format=$28.;
+18  + attrib DSDECODN label='Primary Reason for Not Completing Study' length=8 format=8.;
+19  + attrib HEIGHT   label='Height (cm)' length=8 format=8.2;
+20  + attrib MEDRECD  label='Reason(s) Study Drug Not Received' length=$100 format=$100.;
+21  + attrib MEDRECN  label='Reason(s) Study Drug Not Received (Numer' length=8 format=8.;
+22  + attrib Q_COMP   label='Completed Study?' length=$1 format=$1.;
+23  + attrib Q_ELIGMD label='Eligible But Did Not Receive Study Med' length=$1 format=$1.;
+24  + attrib Q_IMMUAS label='Evaluable for Immunogenicity Analysis' length=$1 format=$1.;
+25  + attrib Q_INFCST label='Provided Informed Consent' length=$1 format=$1.;
+26  + attrib Q_NOTELI label='Informed Consent But Ineligible' length=$1 format=$1.;
+27  + attrib Q_OEELIG label='Met All Eligibility Criteria?' length=$1 format=$1.;
+28  + attrib Q_SAFEAS label='Evaluable for Safety Analysis' length=$1 format=$1.;
+29  + attrib RACE     label='Race' length=$100 format=$100.;
+30  + attrib RANDOMNO label='Randomized Subject Number' length=$4 format=$4.;
+31  + attrib RFENDTC  label='Subject Reference End Date/Time' length=$14 format=$14.;
+32  + attrib RFENDTN  label='Subject Reference End Date/Time (Numeric' length=8 format=DATE9.;
+33  + attrib RFSTDTC  label='Subject Reference Start Date/Time' length=$14 format=$14.;
+34  + attrib RFSTDTN  label='Subject Reference Start Date/Time (Numer' length=8 format=DATE9.;
+35  + attrib SEX      label='Sex' length=$1 format=$1.;
+36  + attrib SEXN     label='Sex (Numeric)' length=4 format=SEXF.;
+37  + attrib SITEID   label='Study Site Identifier' length=$5 format=$5.;
+38  + attrib TBSA     label='Total Body Surface Area (TBSA)' length=8 format=8.2;
+39  + attrib VISIT    label='Visit' length=8 format=8.;
+40  + attrib WEIGHT   label='Weight (kg)' length=8 format=8.2;
+41  + attrib X_RACE   label='Race (Numeric)' length=8 format=RACEF.;
+42  + attrib X_RACEOT label='Race - Other Specify' length=$70 format=$70.;
+43  + set dm;
+44  + keep STUDYID DOMAIN USUBJID SUBJID AGE AGEU ARM ARMCD ATRT BRTHDTC BRTHDTN CNSTDTN COUNTRY DMDTC DMDTN DMDY DSDECOD DSDECODN 
+HEIGHT MEDRECD MEDRECN Q_COMP Q_ELIGMD Q_IMMUAS Q_INFCST Q_NOTELI Q_OEELIG Q_SAFEAS RACE RANDOMNO RFENDTC RFENDTN RFSTDTC RFSTDTN
+45  + SEX SEXN SITEID TBSA VISIT WEIGHT X_RACE X_RACEOT
+46  +
+47  +                                                                                                                                   
+                                                                                                              ;
+48  + run;
+
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set DERIVED.DM has 32 observations and 42 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set DERIVED.DM.
+NOTE: The data set DERIVED.DM has 32 observations and 42 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Deleting WORK.CE (memtype=DATA).
+NOTE: Deleting WORK.DM (memtype=DATA).
+NOTE: Deleting WORK.DS (memtype=DATA).
+NOTE: Deleting WORK.ODDT (memtype=DATA).
+NOTE: Deleting WORK.OE (memtype=DATA).
+NOTE: Deleting WORK.REGSTRY (memtype=ITEMSTOR).
+NOTE: File WORK.REGSTRY (memtype=ITEMSTOR) cannot be deleted because it is in use.
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+NOTE: Deleting WORK.SDA (memtype=DATA).
+NOTE: Deleting WORK.SPC (memtype=DATA).
+NOTE: Deleting WORK.VS (memtype=DATA).
+NOTE: Deleting WORK.XLS (memtype=DATA).
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+

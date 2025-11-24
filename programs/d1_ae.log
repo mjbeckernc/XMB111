@@ -1,0 +1,266 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+94    %include "/nfsshare/sashls2/mattb/XMB111/programs/&prog..sas";
+NOTE: Data file RAW.AE.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      34 at 129:16   34 at 129:25   
+NOTE: There were 101 observations read from the data set RAW.AE.
+NOTE: The data set WORK.AE has 101 observations and 44 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: Data file RAW.BC.DATA is in a format that is native to another host, or the file encoding does not match the session encoding. 
+      Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 142 observations read from the data set RAW.BC.
+NOTE: The data set WORK.BC has 142 observations and 16 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 101 observations read from the data set WORK.AE.
+NOTE: There were 142 observations read from the data set WORK.BC.
+NOTE: The data set WORK.AE has 243 observations and 45 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 243 observations read from the data set WORK.AE.
+NOTE: The data set WORK.AE has 243 observations and 45 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 32 observations read from the data set DERIVED.DM.
+NOTE: The data set WORK.DM has 32 observations and 13 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: Missing values were generated as a result of performing an operation on missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      26 at 174:21   26 at 174:31   83 at 175:21   83 at 175:31   
+NOTE: There were 243 observations read from the data set WORK.AE.
+NOTE: There were 32 observations read from the data set WORK.DM.
+NOTE: The data set WORK.AE has 243 observations and 61 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 101 observations read from the data set WORK.AE.
+      WHERE q_bcond not = 'Y';
+NOTE: The data set WORK.ALLAE has 101 observations and 61 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.CODEAE.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 71 observations read from the data set RAW.CODEAE.
+NOTE: The data set WORK.CODEAE has 71 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 101 observations read from the data set WORK.ALLAE.
+NOTE: There were 71 observations read from the data set WORK.CODEAE.
+NOTE: The data set WORK.ALLAE has 101 observations and 73 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 142 observations read from the data set WORK.AE.
+      WHERE q_bcond='Y';
+NOTE: The data set WORK.ALLBC has 142 observations and 61 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Data file RAW.CODEBC.DATA is in a format that is native to another host, or the file encoding does not match the session 
+      encoding. Cross Environment Data Access will be used, which might require additional CPU resources and might reduce performance.
+
+NOTE: There were 81 observations read from the data set RAW.CODEBC.
+NOTE: The data set WORK.CODEBC has 81 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 142 observations read from the data set WORK.ALLBC.
+NOTE: There were 81 observations read from the data set WORK.CODEBC.
+NOTE: The data set WORK.ALLBC has 142 observations and 73 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 101 observations read from the data set WORK.ALLAE.
+NOTE: There were 142 observations read from the data set WORK.ALLBC.
+NOTE: The data set WORK.AE has 243 observations and 75 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: The UUID 'ee0350a8-0eb3-0f45-a272-1ea1cfe699cb' is connected using session CASAUTO.
+NOTE: The Cloud Analytic Services server processed the request in 0.010049 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: The UUID 'ee0350a8-0eb3-0f45-a272-1ea1cfe699cb' is connected using session CASAUTO.
+NOTE: DERIVED.AE was successfully added to the "Public" caslib as "XMB111_AE".
+NOTE: Cloud Analytic Services promoted table XMB111_AE in caslib Public to table XMB111_AE in caslib public.
+NOTE: The Cloud Analytic Services server processed the request in 0.0119 seconds.
+
+
+NOTE: PROCEDURE CASUTIL used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: One or more variables were converted because the data type is not supported by the V9 engine. For more details, run with options 
+      MSGLEVEL=I.
+NOTE: The import data set has 356 observations and 9 variables.
+NOTE: WORK.ODDT data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.13 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 43 observations read from the data set WORK.ODDT.
+      WHERE filename='AE';
+NOTE: The data set WORK.XLS has 43 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 43 observations read from the data set WORK.XLS.
+NOTE: The data set WORK.CE has 43 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: CALL EXECUTE generated line.
+1   + data derived.AE (label='Study Identifier');
+2   + attrib DOMAIN   label='Domain Abbreviation' length=$2 format=$2.;
+3   + attrib USUBJID  label='Unique Subject Identifier' length=$25 format=$25.;
+4   + attrib AGE      label='Age' length=8 format=8.1;
+5   + attrib ATRT     label='Age Group - numeric' length=8 format=8.;
+6   + attrib RFENDTC  label='Subject Reference End Date/Time' length=$25 format=$25.;
+7   + attrib RFENDTN  label='Subject Reference End Date/Time (Numeric' length=8 format=DATE9.;
+8   + attrib RFSTDTC  label='Subject Reference Start Date/Time' length=$25 format=$25.;
+9   + attrib RFSTDTN  label='Subject Reference Start Date/Time (Numer' length=8 format=DATE9.;
+10  + attrib CNSTDTN  label='Informed Consent Date' length=8 format=DATE9.;
+11  + attrib Q_SAFEAS label='Evaluable for Safety Analysis' length=$1 format=$1.;
+12  + attrib Q_IMMUAS label='Evaluable for Immunogenicity Analysis' length=$1 format=$1.;
+13  + attrib RACE     label='Race' length=$33 format=$33.;
+14  + attrib SEX      label='Gender' length=$6 format=$6.;
+15  + attrib TBSA     label='Total Body Surface Area (TBSA)' length=8 format=8.2;
+16  + attrib AENONE   label='No Adverse Events?' length=$1 format=$1.;
+17  + attrib AETERM   label='AE Description' length=$200 format=$200.;
+18  + attrib AEBODSYS label='Body System or Organ Class' length=$200 format=$200.;
+19  + attrib AEDECOD  label='Dictionary-Derived Term' length=$200 format=$200.;
+20  + attrib AESTDTC  label='Start Date/Time of Adverse Event' length=$14 format=$14.;
+21  + attrib AESTDTN  label='Start Date/Time of Adverse Event (Numeri' length=8 format=DATE9.;
+22  + attrib AESTDY   label='Study Day of Start of Adverse Event' length=4 format=4.;
+23  + attrib AEENDTC  label='End Date/Time of Adverse Event' length=$14 format=$14.;
+24  + attrib AEENDTN  label='End Date/Time of Adverse Event (Numeric)' length=8 format=DATE9.;
+25  + attrib AEENDY   label='Study Day of End of Adverse Event' length=4 format=4.;
+26  + attrib AEACN    label='Action Taken with Study Treatment' length=$25 format=$25.;
+27  + attrib AEACNOTH label='Other Action Taken' length=$200 format=$200.;
+28  + attrib AEACNN   label='Action Taken with Study Treatment (Numer' length=4 format=4.;
+29  + attrib AECONTRT label='Concomitant Medication Given?' length=$2 format=$2.;
+30  + attrib AEDUR    label='Duration of Adverse Event' length=4 format=4.;
+31  + attrib AEHAYN   label='Hypersensitivity AE' length=$1 format=$1.;
+32  + attrib AEOUT    label='Outcome of Adverse Event' length=$50 format=$50.;
+33  + attrib AEREL    label='Causality' length=$50 format=$50.;
+34  + attrib AESER    label='Serious Event' length=$1 format=$1.;
+35  + attrib AESEV    label='Severity/Intensity' length=$50 format=$50.;
+36  + attrib AESPID   label='Sponsor-Defined Identifier' length=$2 format=$2.;
+37  + attrib AETE     label='Treatment Emergent AE' length=$1 format=$1.;
+38  + attrib AETOXGR  label='Standard Toxicity Grade' length=8 format=4.;
+39  + attrib AETRTREL label='Treatment Related AE' length=$1 format=$1.;
+40  + attrib Q_ADDTRT label='Additional Treatment Given?' length=$7 format=$7.;
+41  + attrib Q_AERSLV label='Resolve Date or Ongoing' length=$10 format=$10.;
+42  + attrib Q_BCOND  label='Baseline Condition?' length=$1 format=$1.;
+43  + attrib SUBJYR   label='Subject Year' length=8 format=8.4;
+44  + set AE;
+45  + keep STUDYID DOMAIN USUBJID AGE ATRT RFENDTC RFENDTN RFSTDTC RFSTDTN CNSTDTN Q_SAFEAS Q_IMMUAS RACE SEX TBSA AENONE AETERM 
+AEBODSYS AEDECOD AESTDTC AESTDTN AESTDY AEENDTC AEENDTN AEENDY AEACN AEACNOTH AEACNN AECONTRT AEDUR AEHAYN AEOUT AEREL AESER AESEV
+46  + AESPID AETE AETOXGR AETRTREL Q_ADDTRT Q_AERSLV Q_BCOND SUBJYR
+47  +
+48  +                                                                                                                                   
+                                                                                                               ;
+49  + run;
+
+NOTE: There were 243 observations read from the data set WORK.AE.
+NOTE: The data set DERIVED.AE has 243 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 243 observations read from the data set DERIVED.AE.
+NOTE: The data set DERIVED.AE has 243 observations and 43 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: Deleting WORK.AE (memtype=DATA).
+NOTE: Deleting WORK.ALLAE (memtype=DATA).
+NOTE: Deleting WORK.ALLBC (memtype=DATA).
+NOTE: Deleting WORK.BC (memtype=DATA).
+NOTE: Deleting WORK.CE (memtype=DATA).
+NOTE: Deleting WORK.CODEAE (memtype=DATA).
+NOTE: Deleting WORK.CODEBC (memtype=DATA).
+NOTE: Deleting WORK.DM (memtype=DATA).
+NOTE: Deleting WORK.ODDT (memtype=DATA).
+NOTE: Deleting WORK.REGSTRY (memtype=ITEMSTOR).
+NOTE: File WORK.REGSTRY (memtype=ITEMSTOR) cannot be deleted because it is in use.
+NOTE: Deleting WORK.SASMACR (memtype=CATALOG).
+NOTE: File WORK.SASMACR (memtype=CATALOG) cannot be deleted because it is in use.
+NOTE: Deleting WORK.XLS (memtype=DATA).
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
